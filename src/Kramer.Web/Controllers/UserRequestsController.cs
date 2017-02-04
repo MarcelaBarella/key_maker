@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Kramer.Infra;
 using Kramer.Models;
+using AutoMapper;
 
 namespace Kramer.Controllers
 {
+    [Authorize]
     public class UserRequestsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -39,7 +41,7 @@ namespace Kramer.Controllers
         // GET: UserRequests/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new UserRequestFormViewModel());
         }
 
         // POST: UserRequests/Create
@@ -47,12 +49,13 @@ namespace Kramer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Role,Username")] UserRequest userRequest)
+        public ActionResult Create(UserRequestFormViewModel userRequest)
         {
-            userRequest.Pending = true;
             if (ModelState.IsValid)
             {
-                db.UserRequest.Add(userRequest);
+                var dbModel = Mapper.Map<UserRequest>(userRequest);
+                dbModel.Pending = true;
+                db.UserRequest.Add(dbModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,12 +70,15 @@ namespace Kramer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             UserRequest userRequest = db.UserRequest.Find(id);
             if (userRequest == null)
             {
                 return HttpNotFound();
             }
-            return View(userRequest);
+
+            var model = Mapper.Map<UserRequestFormViewModel>(userRequest);
+            return View(model);
         }
 
         // POST: UserRequests/Edit/5
@@ -80,15 +86,15 @@ namespace Kramer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Role,Username")] UserRequest userRequest)
+        public ActionResult Edit(UserRequestFormViewModel userRequest)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(userRequest).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(userRequest);
+            var dbModel = db.UserRequest.Find(userRequest.Id);
+            
+            Mapper.Map(userRequest, dbModel);
+
+            db.Entry(dbModel).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: UserRequests/Delete/5
