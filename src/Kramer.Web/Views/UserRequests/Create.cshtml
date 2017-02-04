@@ -1,0 +1,24 @@
+﻿@model Kramer.Infra.UserRequest
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.Action = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.Partial("_Form", Model)
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
