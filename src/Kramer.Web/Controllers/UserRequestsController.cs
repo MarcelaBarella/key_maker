@@ -63,7 +63,7 @@ namespace Kramer.Controllers
             return View(userRequest);
         }
 
-        // GET: UserRequests/Edit/5
+        [Authorize(Roles="Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +86,7 @@ namespace Kramer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(UserRequestFormViewModel userRequest)
         {
             var dbModel = db.UserRequest.Find(userRequest.Id);
