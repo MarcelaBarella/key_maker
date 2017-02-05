@@ -9,18 +9,37 @@ using System.Web.Mvc;
 using Kramer.Infra;
 using Kramer.Models;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace Kramer.Controllers
 {
     [Authorize]
     public class UserRequestsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+
+        public UserRequestsController(ApplicationDbContext database)
+        {
+            this.db = database;
+        }
 
         // GET: UserRequests
         public ActionResult Index()
         {
-            return View(db.UserRequest.ToList());
+            const string ADMIN = "1";
+
+            var currentUser = GetCurrentUser();
+            bool isAdmin = currentUser.Roles.Any(role => role.RoleId == ADMIN);
+            var requests = db.UserRequest.AsQueryable(); //select * from UserRequest
+
+            if (!isAdmin)
+            {
+                //select * fromUserRequest 
+                //where requestById == currentUser.Id
+                requests = requests.Where(request => request.RequestedBy.Id == currentUser.Id);
+            }
+
+            return View(requests.ToList());
         }
 
         // GET: UserRequests/Details/5
@@ -54,13 +73,20 @@ namespace Kramer.Controllers
             if (ModelState.IsValid)
             {
                 var dbModel = Mapper.Map<UserRequest>(userRequest);
+                dbModel.RequestedBy = GetCurrentUser();
                 dbModel.Pending = true;
+
                 db.UserRequest.Add(dbModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(userRequest);
+        }
+
+        private ApplicationUser GetCurrentUser()
+        {
+            return db.Users.Find(User.Identity.GetUserId());
         }
 
         [Authorize(Roles="Admin")]
@@ -86,7 +112,6 @@ namespace Kramer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(UserRequestFormViewModel userRequest)
         {
             var dbModel = db.UserRequest.Find(userRequest.Id);
