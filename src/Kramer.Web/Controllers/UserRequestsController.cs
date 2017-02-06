@@ -89,7 +89,25 @@ namespace Kramer.Controllers
             return db.Users.Find(User.Identity.GetUserId());
         }
 
-        [Authorize(Roles="Admin")]
+        public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
+        {
+            var dbModel = db.UserRequest.Find(userRequest.Id);
+
+            if (dbModel.Pending == true)
+            {
+                dbModel.Pending = false;
+            }
+            else 
+            {
+                dbModel.Pending = true;
+            }
+
+            db.Entry(dbModel).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)

@@ -47,7 +47,8 @@
             @Html.DisplayFor(_ => item.RequestedBy.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Change Status", "ChangeStatus", new { id=item.Id})
         </td>
     </tr>
 }

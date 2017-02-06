@@ -13,6 +13,7 @@ namespace Kramer.Models
     {
         public virtual List<UserRequest> UserRequests { get; set; }
 
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -20,6 +21,8 @@ namespace Kramer.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string UserName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -64,6 +64,11 @@ namespace Kramer.Models
 
     public class RegisterViewModel
     {
+        
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        
+        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
