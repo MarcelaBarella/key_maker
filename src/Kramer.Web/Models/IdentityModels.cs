@@ -13,6 +13,8 @@ namespace Kramer.Models
     {
         public virtual List<UserRequest> UserRequests { get; set; }
 
+        public virtual string Name { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

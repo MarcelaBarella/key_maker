@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201702042111173_CreateAdminRole.Designer.cs">
       <DependentUpon>201702042111173_CreateAdminRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702061838584_AddFieldNameToUser.cs" />
+    <Compile Include="Migrations\201702061838584_AddFieldNameToUser.Designer.cs">
+      <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -295,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702042111173_CreateAdminRole.resx">
       <DependentUpon>201702042111173_CreateAdminRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702061838584_AddFieldNameToUser.resx">
+      <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
