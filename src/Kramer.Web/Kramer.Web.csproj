@@ -208,9 +208,9 @@
     <Compile Include="Migrations\201702061838584_AddFieldNameToUser.Designer.cs">
       <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702071739578_SaleTypes.cs" />
-    <Compile Include="Migrations\201702071739578_SaleTypes.Designer.cs">
-      <DependentUpon>201702071739578_SaleTypes.cs</DependentUpon>
+    <Compile Include="Migrations\201702071813327_SaleTypes.cs" />
+    <Compile Include="Migrations\201702071813327_SaleTypes.Designer.cs">
+      <DependentUpon>201702071813327_SaleTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -306,8 +306,8 @@
     <EmbeddedResource Include="Migrations\201702061838584_AddFieldNameToUser.resx">
       <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702071739578_SaleTypes.resx">
-      <DependentUpon>201702071739578_SaleTypes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702071813327_SaleTypes.resx">
+      <DependentUpon>201702071813327_SaleTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

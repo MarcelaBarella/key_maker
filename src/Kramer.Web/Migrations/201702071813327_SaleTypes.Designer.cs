@@ -13,7 +13,7 @@ namespace Kramer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201702071739578_SaleTypes"; }
+            get { return "201702071813327_SaleTypes"; }
         }
         
         string IMigrationMetadata.Source
