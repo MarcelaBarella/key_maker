@@ -14,6 +14,6 @@ namespace Kramer.Domain
         public virtual string Username { get; set; }
         public virtual bool Pending { get; set; }
         public virtual ApplicationUser RequestedBy { get; set; }
-        public virtual List<SaleType> SaleTypes { get; set; }
+        public virtual SaleType SaleType { get; set; }
     }
 }

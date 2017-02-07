@@ -212,6 +212,14 @@
     <Compile Include="Migrations\201702071813327_SaleTypes.Designer.cs">
       <DependentUpon>201702071813327_SaleTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702071910151_CorrectionSaleTypes.cs" />
+    <Compile Include="Migrations\201702071910151_CorrectionSaleTypes.Designer.cs">
+      <DependentUpon>201702071910151_CorrectionSaleTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702071917339_AddBasicSaleTypes.cs" />
+    <Compile Include="Migrations\201702071917339_AddBasicSaleTypes.Designer.cs">
+      <DependentUpon>201702071917339_AddBasicSaleTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -308,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702071813327_SaleTypes.resx">
       <DependentUpon>201702071813327_SaleTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071910151_CorrectionSaleTypes.resx">
+      <DependentUpon>201702071910151_CorrectionSaleTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071917339_AddBasicSaleTypes.resx">
+      <DependentUpon>201702071917339_AddBasicSaleTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
