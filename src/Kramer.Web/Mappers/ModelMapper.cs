@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
-using Kramer.Infra;
+using Kramer.Domain;
 using Kramer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
+
 
 namespace Kramer.Mappers
 {
@@ -13,6 +15,9 @@ namespace Kramer.Mappers
         public static void Map()
         {
             Mapper.CreateMap<UserRequestFormViewModel, UserRequest>().ReverseMap();
+
+            Mapper.CreateMap<RegisterViewModel, ApplicationUser>().ReverseMap();
+
         }
     }
 }

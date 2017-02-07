@@ -186,10 +186,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserRequestsController.cs" />
+    <Compile Include="Domain\SaleType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infra\UserRequest.cs" />
+    <Compile Include="Domain\UserRequest.cs" />
     <Compile Include="Mappers\ModelMapper.cs" />
     <Compile Include="Migrations\201702022038594_InitialCreate.cs" />
     <Compile Include="Migrations\201702022038594_InitialCreate.Designer.cs">
@@ -206,6 +207,10 @@
     <Compile Include="Migrations\201702061838584_AddFieldNameToUser.cs" />
     <Compile Include="Migrations\201702061838584_AddFieldNameToUser.Designer.cs">
       <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702071739578_SaleTypes.cs" />
+    <Compile Include="Migrations\201702071739578_SaleTypes.Designer.cs">
+      <DependentUpon>201702071739578_SaleTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -248,8 +253,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -302,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702061838584_AddFieldNameToUser.resx">
       <DependentUpon>201702061838584_AddFieldNameToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071739578_SaleTypes.resx">
+      <DependentUpon>201702071739578_SaleTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

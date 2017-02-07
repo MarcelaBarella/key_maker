@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Kramer.Infra;
+using Kramer.Domain;
 using Kramer.Models;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
@@ -89,6 +89,7 @@ namespace Kramer.Controllers
             return db.Users.Find(User.Identity.GetUserId());
         }
 
+        [Authorize(Roles="Admin")]
         public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
         {
             var dbModel = db.UserRequest.Find(userRequest.Id);

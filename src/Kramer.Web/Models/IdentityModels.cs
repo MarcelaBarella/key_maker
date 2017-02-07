@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
-using Kramer.Infra;
+using Kramer.Domain;
 
 namespace Kramer.Models
 {
@@ -28,6 +28,8 @@ namespace Kramer.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<UserRequest> UserRequest { get; set; }
+
+        public DbSet<SaleType> SaleType { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
