@@ -220,10 +220,15 @@
     <Compile Include="Migrations\201702071917339_AddBasicSaleTypes.Designer.cs">
       <DependentUpon>201702071917339_AddBasicSaleTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702081714038_CleaningUserResquests.cs" />
+    <Compile Include="Migrations\201702081714038_CleaningUserResquests.Designer.cs">
+      <DependentUpon>201702081714038_CleaningUserResquests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SaleTypeViewModel.cs" />
     <Compile Include="Models\UserRequestFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -322,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702071917339_AddBasicSaleTypes.resx">
       <DependentUpon>201702071917339_AddBasicSaleTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702081714038_CleaningUserResquests.resx">
+      <DependentUpon>201702081714038_CleaningUserResquests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

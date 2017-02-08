@@ -12,6 +12,10 @@ namespace Kramer.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public string Username { get; set; }
-        
+        public List<SaleTypeViewModel> AvailableSaleTypes { get; set; }
+        public SaleTypeViewModel SaleType { get; set; }
+
+
+        public List<SaleTypeViewModel> SaleTypes { get; set; }
     }
 }

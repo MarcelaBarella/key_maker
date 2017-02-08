@@ -60,7 +60,9 @@ namespace Kramer.Controllers
         // GET: UserRequests/Create
         public ActionResult Create()
         {
-            return View(new UserRequestFormViewModel());
+            var viewModel = new UserRequestFormViewModel();
+            viewModel.AvailableSaleTypes = GetSaleTypes();
+            return View(viewModel);
         }
 
         // POST: UserRequests/Create
@@ -72,11 +74,12 @@ namespace Kramer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dbModel = Mapper.Map<UserRequest>(userRequest);
-                dbModel.RequestedBy = GetCurrentUser();
-                dbModel.Pending = true;
 
-                db.UserRequest.Add(dbModel);
+                var dbModelUser = Mapper.Map<UserRequest>(userRequest);
+                dbModelUser.RequestedBy = GetCurrentUser();
+                dbModelUser.Pending = true;
+
+                db.UserRequest.Add(dbModelUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -89,19 +92,17 @@ namespace Kramer.Controllers
             return db.Users.Find(User.Identity.GetUserId());
         }
 
+        private  List<SaleTypeViewModel>GetSaleTypes()
+        {
+            return Mapper.Map<List<SaleTypeViewModel>>(db.SaleType.ToList());
+        }
+
         [Authorize(Roles="Admin")]
         public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
         {
             var dbModel = db.UserRequest.Find(userRequest.Id);
 
-            if (dbModel.Pending == true)
-            {
-                dbModel.Pending = false;
-            }
-            else 
-            {
-                dbModel.Pending = true;
-            }
+            dbModel.Pending = !dbModel.Pending;
 
             db.Entry(dbModel).State = EntityState.Modified;
             db.SaveChanges();
@@ -143,7 +144,7 @@ namespace Kramer.Controllers
         }
 
         // GET: UserRequests/Delete/5
-        public ActionResult Delete(int? id)
+        /*public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -166,7 +167,7 @@ namespace Kramer.Controllers
             db.UserRequest.Remove(userRequest);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

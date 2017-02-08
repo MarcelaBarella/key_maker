@@ -18,6 +18,8 @@ namespace Kramer.Mappers
 
             Mapper.CreateMap<RegisterViewModel, ApplicationUser>().ReverseMap();
 
+            Mapper.CreateMap<SaleTypeViewModel, SaleType>().ReverseMap();
+
         }
     }
 }
