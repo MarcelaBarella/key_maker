@@ -7,12 +7,13 @@ namespace Kramer.Migrations
     {
         public override void Up()
         {
-            DropColumn("dbo.UserRequests", "SaleType_Id");
-            DropForeignKey("dbo.UserRequests", "SaleTypeId", "dbo.SaleTypes");
-            DropIndex("dbo.UserRequests", new[] { "SaleTypeId" });
-            AddColumn("dbo.UserRequests", "SaleTypeId", c => c.Int());
+            DropForeignKey("dbo.UserRequests", "SaleType_Id", "dbo.SaleTypes");
+            DropIndex("dbo.UserRequests", new[] { "SaleType_Id" });
+            RenameColumn(table: "dbo.UserRequests", name: "SaleType_Id", newName: "SaleTypeId");
+            AlterColumn("dbo.UserRequests", "SaleTypeId", c => c.Int());
             CreateIndex("dbo.UserRequests", "SaleTypeId");
-            AddForeignKey("dbo.UserRequests", "SaleTypeId", "dbo.SaleTypes", "Id");
+            AddForeignKey("dbo.UserRequests", "SaleTypeId", "dbo.SaleTypes", "Id", cascadeDelete: true);
+
         }
         
         public override void Down()
