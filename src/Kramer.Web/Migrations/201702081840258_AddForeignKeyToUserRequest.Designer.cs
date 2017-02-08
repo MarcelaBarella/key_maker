@@ -13,7 +13,7 @@ namespace Kramer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201702081812509_AddForeignKeyToUserRequest"; }
+            get { return "201702081840258_AddForeignKeyToUserRequest"; }
         }
         
         string IMigrationMetadata.Source

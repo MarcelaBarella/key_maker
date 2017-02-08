@@ -10,6 +10,6 @@ namespace Kramer.Domain
         public virtual bool Pending { get; set; }
         public virtual ApplicationUser RequestedBy { get; set; }
         public virtual SaleType SaleType { get; set; }
-        public virtual int SaleTypeId { get; set; }
+        public virtual int? SaleTypeId { get; set; }
     }
 }
