@@ -15,9 +15,17 @@
             <select name="SaleType.Id" class="dropdown">
                 @foreach (var saletype in Model.AvailableSaleTypes)
                 {
-
-                    <option value="@saletype.Id">@saletype.Name</option>
-
+                    if (Model.SaleType == null)
+                    {
+                        <option value="@saletype.Id">@saletype.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@saletype.Id"
+                                @(saletype.Id == Model.SaleType.Id ? "selected" : "" )>
+                            @saletype.Name
+                        </option>
+                    }
                 }
             </select>    
     </div>

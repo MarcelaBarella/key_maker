@@ -76,6 +76,8 @@ namespace Kramer.Controllers
             {
 
                 var dbModelUser = Mapper.Map<UserRequest>(userRequest);
+
+                dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.Pending = true;
 
@@ -95,6 +97,11 @@ namespace Kramer.Controllers
         private  List<SaleTypeViewModel>GetSaleTypes()
         {
             return Mapper.Map<List<SaleTypeViewModel>>(db.SaleType.ToList());
+        }
+
+        private SaleType GetSaleTypeById(int id)
+        {
+            return db.SaleType.FirstOrDefault(_ => _.Id == id);
         }
 
         [Authorize(Roles="Admin")]
@@ -124,6 +131,7 @@ namespace Kramer.Controllers
             }
 
             var model = Mapper.Map<UserRequestFormViewModel>(userRequest);
+            model.AvailableSaleTypes = GetSaleTypes();
             return View(model);
         }
 
@@ -138,6 +146,7 @@ namespace Kramer.Controllers
             
             Mapper.Map(userRequest, dbModel);
 
+            dbModel.SaleTypeId = userRequest.SaleType.Id;
             db.Entry(dbModel).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
