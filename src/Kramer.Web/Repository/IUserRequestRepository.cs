@@ -3,7 +3,7 @@ using Kramer.Domain;
 
 namespace Kramer.Repository
 {
-    public interface IUserRequestRepository : IDisposable
+    public interface IUserRequestRepository
     {
         IEnumerable<UserRequest> All();
         UserRequest GetById(int id);
