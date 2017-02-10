@@ -3,10 +3,10 @@ using Kramer.Domain;
 
 namespace Kramer.Repository
 {
-    public interface IUserRequestRepository
+    public interface IUserRequestRepository : IDisposable
     {
         IEnumerable<UserRequest> All();
-        UserRequest Get(int id);
+        UserRequest GetById(int id);
         void Add(UserRequest userRequest);
         void Delete(int id);
         void Update(UserRequest userRequest);
