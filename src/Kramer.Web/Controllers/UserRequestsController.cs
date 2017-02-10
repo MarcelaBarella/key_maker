@@ -52,7 +52,7 @@ namespace Kramer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRequest userRequest = userRequestRepository.Get(id.Value);
+            UserRequest userRequest = userRequestRepository.GetById(id.Value);
             if (userRequest == null)
             {
                 return HttpNotFound();

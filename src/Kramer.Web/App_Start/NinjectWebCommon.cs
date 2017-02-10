@@ -1,3 +1,5 @@
+using Kramer.Repository;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Kramer.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Kramer.App_Start.NinjectWebCommon), "Stop")]
 
@@ -62,7 +64,9 @@ namespace Kramer.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ApplicationDbContext>().To<ApplicationDbContext>();
+            //Isso aqui quer dizer que para cada requisição que for feita, ele vai criar uma instância do DbContext.
+            kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
+            kernel.Bind<IUserRequestRepository>().To<UserRequestRepository>().InRequestScope();
         }        
     }
 }
