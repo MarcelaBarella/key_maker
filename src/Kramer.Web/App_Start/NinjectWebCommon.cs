@@ -67,6 +67,7 @@ namespace Kramer.App_Start
             //Isso aqui quer dizer que para cada requisição que for feita, ele vai criar uma instância do DbContext.
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
             kernel.Bind<IUserRequestRepository>().To<UserRequestRepository>().InRequestScope();
+            kernel.Bind<ISaleTypeRepository>().To<SaleTypeRepository>().InRequestScope();
         }        
     }
 }

@@ -17,14 +17,16 @@ namespace Kramer.Controllers
     [Authorize]
     public class UserRequestsController : Controller
     {
+        private ISaleTypeRepository saleTypeRepository;
         private IUserRequestRepository userRequestRepository;
-        private ApplicationDbContext db;
-
-        public UserRequestsController(IUserRequestRepository userRequestRepository, ApplicationDbContext db)
+        
+        public UserRequestsController(IUserRequestRepository userRequestRepository, ISaleTypeRepository saleTypeRepository)
         {
             this.userRequestRepository = userRequestRepository;
-            this.db = db;
+            this.saleTypeRepository = saleTypeRepository;
+            //this.db = db;
         }
+
 
         // GET: UserRequests
         public ActionResult Index()
@@ -103,7 +105,7 @@ namespace Kramer.Controllers
 
         private SaleType GetSaleTypeById(int id)
         {
-            return db.SaleType.FirstOrDefault(_ => _.Id == id);
+            return .SaleType.FirstOrDefault(_ => _.Id == id);
         }
 
         [Authorize(Roles="Admin")]
@@ -121,7 +123,7 @@ namespace Kramer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             
-            UserRequest userRequest = db.UserRequest.Find(id);
+            UserRequest userRequest = userRequestRepository.GetById(id);
             if (userRequest == null)
             {
                 return HttpNotFound();

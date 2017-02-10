@@ -235,7 +235,9 @@
     <Compile Include="Models\SaleTypeViewModel.cs" />
     <Compile Include="Models\UserRequestFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ISaleTypeRepository.cs" />
     <Compile Include="Repository\IUserRequestRepository.cs" />
+    <Compile Include="Repository\SaleTypeRepository.cs" />
     <Compile Include="Repository\UserRequestRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

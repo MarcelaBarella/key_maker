@@ -13,6 +13,5 @@ namespace Kramer.Repository
         void Add(SaleType saleType);
         void Delete(int id);
         void Update(SaleType saleType);
-        void Edit(int id);
     }
 }
