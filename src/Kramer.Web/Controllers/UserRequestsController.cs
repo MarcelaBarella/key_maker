@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Kramer.Domain;
 using Kramer.Models;
 using AutoMapper;
+using Kramer.Repository;
 using Microsoft.AspNet.Identity;
 
 namespace Kramer.Controllers
@@ -16,11 +17,13 @@ namespace Kramer.Controllers
     [Authorize]
     public class UserRequestsController : Controller
     {
+        private IUserRequestRepository userRequestRepository;
         private ApplicationDbContext db;
 
-        public UserRequestsController(ApplicationDbContext database)
+        public UserRequestsController(IUserRequestRepository userRequestRepository, ApplicationDbContext db)
         {
-            this.db = database;
+            this.userRequestRepository = userRequestRepository;
+            this.db = db;
         }
 
         // GET: UserRequests
@@ -30,7 +33,7 @@ namespace Kramer.Controllers
 
             var currentUser = GetCurrentUser();
             bool isAdmin = currentUser.Roles.Any(role => role.RoleId == ADMIN);
-            var requests = db.UserRequest.AsQueryable(); //select * from UserRequest
+            var requests = userRequestRepository.All(); //select * from UserRequest
 
             if (!isAdmin)
             {
@@ -49,7 +52,7 @@ namespace Kramer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRequest userRequest = db.UserRequest.Find(id);
+            UserRequest userRequest = userRequestRepository.Get(id.Value);
             if (userRequest == null)
             {
                 return HttpNotFound();
@@ -81,8 +84,7 @@ namespace Kramer.Controllers
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.Pending = true;
 
-                db.UserRequest.Add(dbModelUser);
-                db.SaveChanges();
+                userRequestRepository.Add(dbModelUser);
                 return RedirectToAction("Index");
             }
 
@@ -107,12 +109,7 @@ namespace Kramer.Controllers
         [Authorize(Roles="Admin")]
         public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
         {
-            var dbModel = db.UserRequest.Find(userRequest.Id);
-
-            dbModel.Pending = !dbModel.Pending;
-
-            db.Entry(dbModel).State = EntityState.Modified;
-            db.SaveChanges();
+            userRequestRepository.ChangeStatus(userRequest.Id);
             return RedirectToAction("Index");
         }
 
@@ -147,8 +144,7 @@ namespace Kramer.Controllers
             Mapper.Map(userRequest, dbModel);
 
             dbModel.SaleTypeId = userRequest.SaleType.Id;
-            db.Entry(dbModel).State = EntityState.Modified;
-            db.SaveChanges();
+            userRequestRepository.Update(dbModel);
             return RedirectToAction("Index");
         }
 
