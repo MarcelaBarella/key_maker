@@ -10,5 +10,6 @@ namespace Kramer.Repository
         void Add(UserRequest userRequest);
         void Delete(int id);
         void Update(UserRequest userRequest);
+        void ChangeStatus(int id);
     }
 }
