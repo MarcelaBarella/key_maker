@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201702121828163_CreateProcedureToAddRoleToUser.Designer.cs">
       <DependentUpon>201702121828163_CreateProcedureToAddRoleToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702121854167_CreateSaleTypeProcedure.cs" />
+    <Compile Include="Migrations\201702121854167_CreateSaleTypeProcedure.Designer.cs">
+      <DependentUpon>201702121854167_CreateSaleTypeProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -363,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702121828163_CreateProcedureToAddRoleToUser.resx">
       <DependentUpon>201702121828163_CreateProcedureToAddRoleToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702121854167_CreateSaleTypeProcedure.resx">
+      <DependentUpon>201702121854167_CreateSaleTypeProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

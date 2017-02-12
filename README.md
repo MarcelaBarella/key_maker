@@ -12,3 +12,8 @@ Para criar um usuário administrador, algumas etapas são necessárias:
 Execute a seguinte procedure:
 
 ```exec AddRoleToUser 'email do usuário do sistema', 'Canal de Venda par qual terá acesso'```
+
+## Adcionando um SaleType
+Execute a seguinte procedure:
+
+``` exec AddSaleType 'Nome do canal de vendas' ```
