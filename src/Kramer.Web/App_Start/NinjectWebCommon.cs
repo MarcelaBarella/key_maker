@@ -13,6 +13,8 @@ namespace Kramer.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Kramer.Models;
+    using Kramer.Repository.Interfaces;
+    using Kramer.Services;
 
     public static class NinjectWebCommon 
     {
@@ -68,6 +70,9 @@ namespace Kramer.App_Start
             kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
             kernel.Bind<IUserRequestRepository>().To<UserRequestRepository>().InRequestScope();
             kernel.Bind<ISaleTypeRepository>().To<SaleTypeRepository>().InRequestScope();
+            kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            kernel.Bind<IRoleRepository>().To<RoleRepository>().InRequestScope();
+            kernel.Bind<ISaleTypeService>().To<SaleTypeService>().InRequestScope();
         }        
     }
 }

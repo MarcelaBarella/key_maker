@@ -11,6 +11,7 @@ using Kramer.Models;
 using AutoMapper;
 using Kramer.Repository;
 using Microsoft.AspNet.Identity;
+using Kramer.Services;
 
 namespace Kramer.Controllers
 {
@@ -19,12 +20,19 @@ namespace Kramer.Controllers
     {
         private ISaleTypeRepository saleTypeRepository;
         private IUserRequestRepository userRequestRepository;
+        private IUserRepository userRepository;
+        private ISaleTypeService saleTypeService;
         
-        public UserRequestsController(IUserRequestRepository userRequestRepository, ISaleTypeRepository saleTypeRepository)
+        public UserRequestsController(
+            IUserRequestRepository userRequestRepository, 
+            ISaleTypeRepository saleTypeRepository, 
+            IUserRepository userRepository,
+            ISaleTypeService saleTypeService)
         {
             this.userRequestRepository = userRequestRepository;
             this.saleTypeRepository = saleTypeRepository;
-            //this.db = db;
+            this.userRepository = userRepository;
+            this.saleTypeService = saleTypeService;
         }
 
 
@@ -93,21 +101,6 @@ namespace Kramer.Controllers
             return View(userRequest);
         }
 
-        private ApplicationUser GetCurrentUser()
-        {
-            return db.Users.Find(User.Identity.GetUserId());
-        }
-
-        private  List<SaleTypeViewModel>GetSaleTypes()
-        {
-            return Mapper.Map<List<SaleTypeViewModel>>(db.SaleType.ToList());
-        }
-
-        private SaleType GetSaleTypeById(int id)
-        {
-            return .SaleType.FirstOrDefault(_ => _.Id == id);
-        }
-
         [Authorize(Roles="Admin")]
         public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
         {
@@ -116,7 +109,7 @@ namespace Kramer.Controllers
         }
 
         
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
@@ -141,7 +134,7 @@ namespace Kramer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserRequestFormViewModel userRequest)
         {
-            var dbModel = db.UserRequest.Find(userRequest.Id);
+            var dbModel = userRequestRepository.GetById(userRequest.Id);
             
             Mapper.Map(userRequest, dbModel);
 
@@ -150,39 +143,20 @@ namespace Kramer.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: UserRequests/Delete/5
-        /*public ActionResult Delete(int? id)
+        private ApplicationUser GetCurrentUser()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserRequest userRequest = db.UserRequest.Find(id);
-            if (userRequest == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userRequest);
+            return userRepository.GetById(User.Identity.GetUserId());
         }
 
-        // POST: UserRequests/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        private List<SaleTypeViewModel> GetSaleTypes()
         {
-            UserRequest userRequest = db.UserRequest.Find(id);
-            db.UserRequest.Remove(userRequest);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
+            var saleTypes = saleTypeService.GetAvailableSaleTypes(GetCurrentUser().Id);
+            return Mapper.Map<List<SaleTypeViewModel>>(saleTypes);
+        }
 
-        protected override void Dispose(bool disposing)
+        private SaleType GetSaleTypeById(int id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return saleTypeRepository.GetById(id);
         }
     }
 }

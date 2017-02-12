@@ -228,6 +228,14 @@
     <Compile Include="Migrations\201702081840258_AddForeignKeyToUserRequest.Designer.cs">
       <DependentUpon>201702081840258_AddForeignKeyToUserRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702091327276_CreateNewRoles.cs" />
+    <Compile Include="Migrations\201702091327276_CreateNewRoles.Designer.cs">
+      <DependentUpon>201702091327276_CreateNewRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702121828163_CreateProcedureToAddRoleToUser.cs" />
+    <Compile Include="Migrations\201702121828163_CreateProcedureToAddRoleToUser.Designer.cs">
+      <DependentUpon>201702121828163_CreateProcedureToAddRoleToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -235,10 +243,18 @@
     <Compile Include="Models\SaleTypeViewModel.cs" />
     <Compile Include="Models\UserRequestFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ISaleTypeRepository.cs" />
-    <Compile Include="Repository\IUserRequestRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRepository.cs" />
+    <Compile Include="Repository\Interfaces\ISaleTypeRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserRequestRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRoleRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\SaleTypeRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\UserRequestRepository.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Services\Interfaces\ISaleTypeService.cs" />
+    <Compile Include="Services\SaleTypeService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +357,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702081840258_AddForeignKeyToUserRequest.resx">
       <DependentUpon>201702081840258_AddForeignKeyToUserRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702091327276_CreateNewRoles.resx">
+      <DependentUpon>201702091327276_CreateNewRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702121828163_CreateProcedureToAddRoleToUser.resx">
+      <DependentUpon>201702121828163_CreateProcedureToAddRoleToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
