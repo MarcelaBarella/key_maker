@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Net;
+using System.Net.Mail;
 
 namespace Kramer.Helpers
 {
@@ -6,14 +7,12 @@ namespace Kramer.Helpers
     {
         private SmtpClient smtp;
 
-        /*As informações que você precisar para configurar  o SMTP, você recebe
-         * via construtor */
-        public EmailSender(/*string host, int port, ...*/)
+        public EmailSender(string host, int port, string username, string password)
         {
             smtp = new SmtpClient();
-            smtp.Host = "";
-            smtp.Port = 0;
-            // e as outras configuracoes do smtp vão aqui
+            smtp.Host = host;
+            smtp.Port = port;
+            smtp.Credentials = new NetworkCredential(username, password);
         }
 
         public string To { get; set; }
