@@ -22,7 +22,10 @@ namespace Kramer.Helpers
 
         public void Send()
         {
-            // o envio do e-mail será feito aqui utilizando o SMTP
+            MailMessage mail = new MailMessage(From, To);
+            mail.Subject = Subject;
+            mail.Body = Body;
+            smtp.Send(mail);
         }
     }
 }
