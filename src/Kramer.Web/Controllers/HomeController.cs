@@ -12,10 +12,5 @@ namespace Kramer.Controllers
         {
             return View();
         }
-
-        public ActionResult Requests()
-        {
-            return View("../UserRequests/Index");
-        }
     }
 }

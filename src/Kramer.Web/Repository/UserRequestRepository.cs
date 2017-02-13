@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System;
 using Kramer.Domain;
 using Kramer.Models;
 
@@ -16,10 +15,10 @@ namespace Kramer.Repository
             Update(userRequest);
         }
 
-        public override void Add()
+        public override void Add(UserRequest entity)
         {
-            entity.RequestDate = DateTime.Now();
-            db.Add(entity);
+            entity.RequestDate = DateTime.Now;
+            base.Add(entity);
         }
     }
 }
