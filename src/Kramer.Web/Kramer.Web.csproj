@@ -191,6 +191,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Domain\UserRequest.cs" />
+    <Compile Include="Helpers\EmailSender.cs" />
+    <Compile Include="Helpers\IEmailSender.cs" />
     <Compile Include="Mappers\ModelMapper.cs" />
     <Compile Include="Migrations\201702022038594_InitialCreate.cs" />
     <Compile Include="Migrations\201702022038594_InitialCreate.Designer.cs">
@@ -239,6 +241,10 @@
     <Compile Include="Migrations\201702121854167_CreateSaleTypeProcedure.cs" />
     <Compile Include="Migrations\201702121854167_CreateSaleTypeProcedure.Designer.cs">
       <DependentUpon>201702121854167_CreateSaleTypeProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702131502266_AddDateToUserRequests.cs" />
+    <Compile Include="Migrations\201702131502266_AddDateToUserRequests.Designer.cs">
+      <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -370,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702121854167_CreateSaleTypeProcedure.resx">
       <DependentUpon>201702121854167_CreateSaleTypeProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702131502266_AddDateToUserRequests.resx">
+      <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

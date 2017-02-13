@@ -18,13 +18,16 @@
             Canal de Vendas
         </th>
         <th>
-            Nome do Usuário
+            Nome
         </th>
         <th>
             Pendente
         </th>
         <th>
             Solicitante
+        </th>
+        <th>
+            Data da Solicitação
         </th>
         <th></th>
     </tr>
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(_ => item.RequestedBy.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(_ => item.RequestDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
