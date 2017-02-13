@@ -40,6 +40,7 @@ namespace Kramer.Controllers
             }
         }
 
+        //O email service do forgot password vai ser setado aqui.
         public ApplicationUserManager UserManager
         {
             get
