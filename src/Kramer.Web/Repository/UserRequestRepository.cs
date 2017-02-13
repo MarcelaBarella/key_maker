@@ -15,5 +15,11 @@ namespace Kramer.Repository
             userRequest.Pending = !userRequest.Pending;
             Update(userRequest);
         }
+
+        public override void Add()
+        {
+            entity.RequestDate = DateTime.Now();
+            db.Add(entity);
+        }
     }
 }

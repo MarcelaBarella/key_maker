@@ -14,8 +14,7 @@ namespace Kramer.Models
         public string Username { get; set; }
         public List<SaleTypeViewModel> AvailableSaleTypes { get; set; }
         public SaleTypeViewModel SaleType { get; set; }
-
-
         public List<SaleTypeViewModel> SaleTypes { get; set; }
+        public DateTime RequestDate { get; set; }
     }
 }

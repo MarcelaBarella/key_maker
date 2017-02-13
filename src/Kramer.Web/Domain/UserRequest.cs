@@ -1,4 +1,5 @@
 ﻿using Kramer.Models;
+using System;
 
 namespace Kramer.Domain
 {
@@ -11,5 +12,6 @@ namespace Kramer.Domain
         public virtual ApplicationUser RequestedBy { get; set; }
         public virtual SaleType SaleType { get; set; }
         public virtual int? SaleTypeId { get; set; }
+        public virtual DateTime RequestDate { get; set; }
     }
 }

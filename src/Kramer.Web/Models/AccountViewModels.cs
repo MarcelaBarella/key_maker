@@ -64,7 +64,7 @@ namespace Kramer.Models
 
     public class RegisterViewModel
     {
-        [Display(Name = "Nome Completo")]
+        [Display(Name = "User Name")]
         public string Name { get; set; }
         
         [Required]

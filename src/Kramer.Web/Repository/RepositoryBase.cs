@@ -26,7 +26,7 @@ namespace Kramer.Repository
             return db.Set<T>().Find(id);
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             db.Set<T>().Add(entity);
             db.SaveChanges();
