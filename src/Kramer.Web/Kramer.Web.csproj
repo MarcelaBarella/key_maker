@@ -187,6 +187,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserRequestsController.cs" />
     <Compile Include="Domain\SaleType.cs" />
+    <Compile Include="Domain\Status.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,21 +247,28 @@
     <Compile Include="Migrations\201702131502266_AddDateToUserRequests.Designer.cs">
       <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702141736258_ChangePendingToStatus.cs" />
+    <Compile Include="Migrations\201702141736258_ChangePendingToStatus.Designer.cs">
+      <DependentUpon>201702141736258_ChangePendingToStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SaleTypeViewModel.cs" />
+    <Compile Include="Models\StatusViewModel.cs" />
     <Compile Include="Models\UserRequestChangeStatusViewModel.cs" />
     <Compile Include="Models\UserRequestFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Interfaces\IRepository.cs" />
     <Compile Include="Repository\Interfaces\ISaleTypeRepository.cs" />
+    <Compile Include="Repository\Interfaces\IStatusRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRequestRepository.cs" />
     <Compile Include="Repository\Interfaces\IRoleRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\SaleTypeRepository.cs" />
+    <Compile Include="Repository\StatusRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\UserRequestRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
@@ -381,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702131502266_AddDateToUserRequests.resx">
       <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702141736258_ChangePendingToStatus.resx">
+      <DependentUpon>201702141736258_ChangePendingToStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

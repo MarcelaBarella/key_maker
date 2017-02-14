@@ -11,7 +11,7 @@ namespace Kramer.Repository
         public void ChangeStatus(int id)
         {
             var userRequest = GetById(id);
-            userRequest.Pending = !userRequest.Pending;
+            //userRequest.Status = !userRequest.Status;
             Update(userRequest);
         }
 

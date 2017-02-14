@@ -92,7 +92,7 @@ namespace Kramer.Controllers
 
                 dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
-                dbModelUser.Pending = true;
+                //dbModelUser.Status = true;
 
                 userRequestRepository.Add(dbModelUser);
                 return RedirectToAction("Index");
@@ -115,10 +115,16 @@ namespace Kramer.Controllers
             userRequestRepository.ChangeStatus(userRequest.Id);
             emailSender.To = userRequest.Email;
             emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
-            emailSender.Subject = "Seu usuário foi criado!";
+            emailSender.Subject = "Global Payments - Credenciais de Acesso";
             emailSender.Body =
-                "Parabéns, seu usuário foi criado. Seus dados de acesso são: "
-                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequest.Password;
+                "Olá" //Nome da pessoa
+                + "</br ></br>"
+                + "Você está recebendo este email por solicitação da Global Payments. </br>"
+                + "Abaixo estão suas credenciais para acessar o Portal de Serviços da Global Payments.Elas devem ser usadas exclusivamente por você, e não devem ser compartilhadas com outras pessoas.</br>"
+                + "https://portaldeservicos.globalpagamentos.com.br/Pages/Login-global.aspx?x=7A41CA43-8BED-4975-9EB8-FFED74B5228F</br>"
+                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequest.Password
+                + "</br> Troque sua senha ao acessar o portal.</br>"
+                + "Qualquer dúvida operacional, entre em contato com a Global Payments.";
             emailSender.Send();
 
             return RedirectToAction("Index");

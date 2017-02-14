@@ -75,6 +75,7 @@ namespace Kramer.App_Start
             kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
             kernel.Bind<IRoleRepository>().To<RoleRepository>().InRequestScope();
             kernel.Bind<ISaleTypeService>().To<SaleTypeService>().InRequestScope();
+            kernel.Bind<IStatusRepository>().To<StatusRepository>().InRequestScope();
             kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope()
                 .WithConstructorArgument("host", ConfigurationManager.AppSettings["SmtpHost"])
                 .WithConstructorArgument("port", int.Parse(ConfigurationManager.AppSettings["SmtpPort"]))
