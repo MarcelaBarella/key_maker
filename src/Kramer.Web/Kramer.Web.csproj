@@ -251,6 +251,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SaleTypeViewModel.cs" />
+    <Compile Include="Models\UserRequestChangeStatusViewModel.cs" />
     <Compile Include="Models\UserRequestFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Interfaces\IRepository.cs" />
@@ -328,6 +329,7 @@
     <Content Include="Views\UserRequests\Edit.cshtml" />
     <Content Include="Views\UserRequests\Index.cshtml" />
     <Content Include="Views\UserRequests\_Form.cshtml" />
+    <Content Include="Views\UserRequests\ChangeStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,34 @@
+﻿@model Kramer.Models.UserRequestChangeStatusViewModel
+@{
+    ViewBag.Title = "Dar Baixa";
+}
+
+<h2>Dar baixa em @Model.Email</h2>
+
+@using(@Html.BeginForm())
+{
+	<div class="form-horizontal">
+	   	<input type="hidden" name="Email" value=@Model.Email>
+	   	<input type="hidden" name="Id" value=@Model.Id>
+
+	   	<div class="form-group">
+	   		<label for="Username" class="control-label col-md-2">Nome de Usuário:</label>
+	   		<div class="col-md-10">
+	   			<input type="text" name="Username">
+	   		</div>
+	   	</div>
+
+	   	<div class="form-group">
+	   		<label for="Password" class="control-label col-md-2">Senha: </label>
+	   		<div class="col-md-10">
+	   			<input type="text" name="Password">
+			</div>
+	   	</div>
+
+	   	<div class="form-group">
+	   		<div class="col-md-offset-2 col-md-10">
+	   			<input type="submit" value="Dar Baixa" class="btn btn-default">
+			</div>
+	   	</div>
+   	</div>
+}

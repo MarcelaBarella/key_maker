@@ -7,12 +7,13 @@ namespace Kramer.Helpers
     {
         private SmtpClient smtp;
 
-        public EmailSender(string host, int port, string username, string password)
+        public EmailSender(string host, int port, string username, string password, bool enableSsl)
         {
             smtp = new SmtpClient();
             smtp.Host = host;
             smtp.Port = port;
             smtp.Credentials = new NetworkCredential(username, password);
+            smtp.EnableSsl = enableSsl;
         }
 
         public string To { get; set; }

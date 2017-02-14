@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Kramer.Domain;
-using Kramer.Models;
 using AutoMapper;
+using Kramer.Domain;
+using Kramer.Helpers;
+using Kramer.Models;
 using Kramer.Repository;
-using Microsoft.AspNet.Identity;
 using Kramer.Services;
+using Microsoft.AspNet.Identity;
 
 namespace Kramer.Controllers
 {
@@ -22,17 +19,20 @@ namespace Kramer.Controllers
         private IUserRequestRepository userRequestRepository;
         private IUserRepository userRepository;
         private ISaleTypeService saleTypeService;
+        private IEmailSender emailSender;
         
         public UserRequestsController(
             IUserRequestRepository userRequestRepository, 
             ISaleTypeRepository saleTypeRepository, 
             IUserRepository userRepository,
-            ISaleTypeService saleTypeService)
+            ISaleTypeService saleTypeService,
+            IEmailSender emailSender)
         {
             this.userRequestRepository = userRequestRepository;
             this.saleTypeRepository = saleTypeRepository;
             this.userRepository = userRepository;
             this.saleTypeService = saleTypeService;
+            this.emailSender = emailSender;
         }
 
 
@@ -101,10 +101,26 @@ namespace Kramer.Controllers
             return View(userRequest);
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult ChangeStatus(int id)
+        {
+            var userRequest = Mapper.Map<UserRequestChangeStatusViewModel>(userRequestRepository.GetById(id));
+            return View(userRequest);
+        }
+
         [Authorize(Roles="Admin")]
-        public ActionResult ChangeStatus(UserRequestFormViewModel userRequest)
+        [HttpPost]
+        public ActionResult ChangeStatus(UserRequestChangeStatusViewModel userRequest)
         {
             userRequestRepository.ChangeStatus(userRequest.Id);
+            emailSender.To = userRequest.Email;
+            emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
+            emailSender.Subject = "Seu usuário foi criado!";
+            emailSender.Body =
+                "Parabéns, seu usuário foi criado. Seus dados de acesso são: "
+                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequest.Password;
+            emailSender.Send();
+
             return RedirectToAction("Index");
         }
 

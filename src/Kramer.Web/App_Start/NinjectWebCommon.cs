@@ -1,3 +1,5 @@
+using System.Configuration;
+using Kramer.Helpers;
 using Kramer.Repository;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Kramer.App_Start.NinjectWebCommon), "Start")]
@@ -73,6 +75,13 @@ namespace Kramer.App_Start
             kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
             kernel.Bind<IRoleRepository>().To<RoleRepository>().InRequestScope();
             kernel.Bind<ISaleTypeService>().To<SaleTypeService>().InRequestScope();
+            kernel.Bind<IEmailSender>().To<EmailSender>().InRequestScope()
+                .WithConstructorArgument("host", ConfigurationManager.AppSettings["SmtpHost"])
+                .WithConstructorArgument("port", int.Parse(ConfigurationManager.AppSettings["SmtpPort"]))
+                .WithConstructorArgument("username", ConfigurationManager.AppSettings["SmtpUsername"])
+                .WithConstructorArgument("password", ConfigurationManager.AppSettings["SmtpPassword"])
+                .WithConstructorArgument("enableSsl", bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"]));
+
         }        
     }
 }
