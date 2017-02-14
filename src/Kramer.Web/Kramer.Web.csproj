@@ -247,9 +247,9 @@
     <Compile Include="Migrations\201702131502266_AddDateToUserRequests.Designer.cs">
       <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702141736258_ChangePendingToStatus.cs" />
-    <Compile Include="Migrations\201702141736258_ChangePendingToStatus.Designer.cs">
-      <DependentUpon>201702141736258_ChangePendingToStatus.cs</DependentUpon>
+    <Compile Include="Migrations\201702141807277_ChangePendingToStatus.cs" />
+    <Compile Include="Migrations\201702141807277_ChangePendingToStatus.Designer.cs">
+      <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -390,8 +390,8 @@
     <EmbeddedResource Include="Migrations\201702131502266_AddDateToUserRequests.resx">
       <DependentUpon>201702131502266_AddDateToUserRequests.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702141736258_ChangePendingToStatus.resx">
-      <DependentUpon>201702141736258_ChangePendingToStatus.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702141807277_ChangePendingToStatus.resx">
+      <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -13,7 +13,7 @@ namespace Kramer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201702141736258_ChangePendingToStatus"; }
+            get { return "201702141807277_ChangePendingToStatus"; }
         }
         
         string IMigrationMetadata.Source
