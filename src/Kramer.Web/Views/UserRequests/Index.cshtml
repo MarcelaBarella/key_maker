@@ -15,19 +15,19 @@
             E-mail
         </th>
         <th>
-            Canal de Vendas
+            Sale Type
         </th>
         <th>
-            Nome
+            Name
         </th>
         <th>
-            Pendente
+            Status
         </th>
         <th>
-            Solicitante
+            Requester
         </th>
         <th>
-            Data da Solicitação
+            Request Date
         </th>
         <th></th>
     </tr>
@@ -44,7 +44,7 @@
             @Html.DisplayFor(_ => item.Username)
         </td>
         <td>
-            @Html.DisplayFor(_ => item.Pending)
+            @Html.DisplayFor(_ => item.Status)
         </td>
         <td>
             @Html.DisplayFor(_ => item.RequestedBy.Email)

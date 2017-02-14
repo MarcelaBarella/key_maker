@@ -92,7 +92,8 @@ namespace Kramer.Controllers
 
                 dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
-                //dbModelUser.Status = true;
+                dbModelUser.StatusId = 1;
+
 
                 userRequestRepository.Add(dbModelUser);
                 return RedirectToAction("Index");
