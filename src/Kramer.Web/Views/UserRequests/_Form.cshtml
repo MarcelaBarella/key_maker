@@ -18,6 +18,16 @@
     </div>
 
     <div class="form-group">
+        <label for="Usertype" class="control-label col-md-2">User Type</label>
+        <div class="radio">
+            <label><input type="radio" name="UsertypeGM" id="UsertypeGM" />Global Master</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="UsertypeST" id="UsertypeST" />Sale Type</label>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="SaleType" class="control-label col-md-2">Sale Type</label>
         <select name="SaleType.Id" class="dropdown col-md-offset-2">
             @foreach (var saletype in Model.AvailableSaleTypes)

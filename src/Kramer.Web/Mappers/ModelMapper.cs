@@ -20,7 +20,7 @@ namespace Kramer.Mappers
                 .ForMember(model => model.Status, opt => opt.Ignore())
                 .ForMember(model => model.StatusId, opt => opt.MapFrom(viewModel => viewModel.Status.Id));
 
-            //Creio que o mapper que tem que ter aqui deve ser parecido com o primeiro!!
+
             Mapper.CreateMap<RegisterViewModel, ApplicationUser>().ReverseMap();
             Mapper.CreateMap<SaleType, SaleTypeViewModel>();
             Mapper.CreateMap<Status, StatusViewModel>();
