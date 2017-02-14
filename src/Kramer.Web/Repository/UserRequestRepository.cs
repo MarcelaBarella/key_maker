@@ -8,10 +8,10 @@ namespace Kramer.Repository
     {
         public UserRequestRepository(ApplicationDbContext db) : base(db) {}
 
-        public void ChangeStatus(int id)
+        public void ChangeStatus(int userId, int statusId)
         {
-            var userRequest = GetById(id);
-            //userRequest.Status = !userRequest.Status;
+            var userRequest = GetById(userId);
+            userRequest.StatusId = statusId;
             Update(userRequest);
         }
 

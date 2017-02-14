@@ -81,7 +81,8 @@ namespace Kramer.App_Start
                 .WithConstructorArgument("port", int.Parse(ConfigurationManager.AppSettings["SmtpPort"]))
                 .WithConstructorArgument("username", ConfigurationManager.AppSettings["SmtpUsername"])
                 .WithConstructorArgument("password", ConfigurationManager.AppSettings["SmtpPassword"])
-                .WithConstructorArgument("enableSsl", bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"]));
+                .WithConstructorArgument("enableSsl", bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"]))
+                .WithConstructorArgument("throwError", bool.Parse(ConfigurationManager.AppSettings["SmtpThrowError"]));
 
         }        
     }

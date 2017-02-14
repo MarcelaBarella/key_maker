@@ -5,7 +5,7 @@ namespace Kramer.Repository
 {
     public interface IUserRequestRepository : IRepository<UserRequest>
     {
-        void ChangeStatus(int id);
+        void ChangeStatus(int userId, int statusId);
 
     }
 }

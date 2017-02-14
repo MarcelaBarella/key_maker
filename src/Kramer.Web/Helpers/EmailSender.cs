@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 
 namespace Kramer.Helpers
@@ -6,14 +7,16 @@ namespace Kramer.Helpers
     public class EmailSender : IEmailSender
     {
         private SmtpClient smtp;
+        private bool throwError;
 
-        public EmailSender(string host, int port, string username, string password, bool enableSsl)
+        public EmailSender(string host, int port, string username, string password, bool enableSsl, bool throwError)
         {
             smtp = new SmtpClient();
             smtp.Host = host;
             smtp.Port = port;
             smtp.Credentials = new NetworkCredential(username, password);
             smtp.EnableSsl = enableSsl;
+            this.throwError = throwError;
         }
 
         public string To { get; set; }
@@ -23,10 +26,18 @@ namespace Kramer.Helpers
 
         public void Send()
         {
-            MailMessage mail = new MailMessage(From, To);
-            mail.Subject = Subject;
-            mail.Body = Body;
-            smtp.Send(mail);
+            try
+            {
+                MailMessage mail = new MailMessage(From, To);
+                mail.Subject = Subject;
+                mail.Body = Body;
+                smtp.Send(mail);
+            }
+            catch
+            {
+                if (throwError)
+                    throw;
+            }
         }
     }
 }
