@@ -7,6 +7,7 @@ using Kramer.Domain;
 using Kramer.Helpers;
 using Kramer.Models;
 using Kramer.Repository;
+using Kramer.Repository.Interfaces;
 using Kramer.Services;
 using Microsoft.AspNet.Identity;
 
@@ -20,11 +21,13 @@ namespace Kramer.Controllers
         private IUserRepository userRepository;
         private ISaleTypeService saleTypeService;
         private IEmailSender emailSender;
-        
+        private IStatusRepository statusRepository;
+
         public UserRequestsController(
             IUserRequestRepository userRequestRepository, 
             ISaleTypeRepository saleTypeRepository, 
             IUserRepository userRepository,
+            IStatusRepository statusRepository,
             ISaleTypeService saleTypeService,
             IEmailSender emailSender)
         {
@@ -33,6 +36,7 @@ namespace Kramer.Controllers
             this.userRepository = userRepository;
             this.saleTypeService = saleTypeService;
             this.emailSender = emailSender;
+            this.statusRepository = statusRepository;
         }
 
 
@@ -85,6 +89,8 @@ namespace Kramer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserRequestFormViewModel userRequest)
         {
+            const int PENDING = 1;
+
             if (ModelState.IsValid)
             {
 
@@ -92,7 +98,7 @@ namespace Kramer.Controllers
 
                 dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
-                dbModelUser.StatusId = 1;
+                dbModelUser.StatusId = PENDING;
 
 
                 userRequestRepository.Add(dbModelUser);
@@ -106,6 +112,7 @@ namespace Kramer.Controllers
         public ActionResult ChangeStatus(int id)
         {
             var userRequest = Mapper.Map<UserRequestChangeStatusViewModel>(userRequestRepository.GetById(id));
+            userRequest.Statuses = Mapper.Map<List<StatusViewModel>>(statusRepository.All().ToList());
             return View(userRequest);
         }
 
@@ -113,7 +120,7 @@ namespace Kramer.Controllers
         [HttpPost]
         public ActionResult ChangeStatus(UserRequestChangeStatusViewModel userRequest)
         {
-            userRequestRepository.ChangeStatus(userRequest.Id);
+            userRequestRepository.ChangeStatus(userRequest.Id, userRequest.Status.Id);
             emailSender.To = userRequest.Email;
             emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
             emailSender.Subject = "Global Payments - Credenciais de Acesso";
