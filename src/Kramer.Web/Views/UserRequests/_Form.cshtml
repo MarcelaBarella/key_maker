@@ -19,17 +19,17 @@
 
     <div class="form-group">
         <label for="Usertype" class="control-label col-md-2">User Type</label>
-        <div class="radio">
-            <label><input type="radio" name="UsertypeGM" id="UsertypeGM" />Global Master</label>
+        <div class="radio-inline">
+            <label><input type="radio" name="optradio" id="UsertypeGM" value="UsertypeGM" />Global Master</label>
         </div>
-        <div class="radio">
-            <label><input type="radio" name="UsertypeST" id="UsertypeST" />Sale Type</label>
+        <div class="radio-inline">
+            <label><input type="radio" name="optradio" id="UsertypeST" value="UsertypeST" />Sale Type</label>
         </div>
     </div>
 
     <div class="form-group">
         <label for="SaleType" class="control-label col-md-2">Sale Type</label>
-        <select name="SaleType.Id" class="dropdown col-md-offset-2">
+        <select id="saletypedrop" name="SaleType.Id" class="dropdown col-md-offset-2" disabled="true"/>
             @foreach (var saletype in Model.AvailableSaleTypes)
             {
                 if (Model.SaleType == null)
@@ -55,3 +55,27 @@
         </div>
     </div>
 </div>
+@section Script {
+    @Scripts.Render("~/bundles/jquery-1.10.2.js")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[name="optradio"]').click(function () {
+                if ($('input[name="optradio"]').is(':checked')) {
+                    var radioValue = $("input[name='optradio']:checked").val();
+                    if (radioValue == "UsertypeGM") {
+                        $("#saletypedrop").prop("disabled", true);
+                        $("#saletypedrop").val("null");
+                    } else {
+                        $("#saletypedrop").prop("disabled", false);
+                    }
+                }
+            });
+        });
+    </script>
+    
+    
+    }
+
+
