@@ -7,13 +7,13 @@ namespace Kramer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class teste : IMigrationMetadata
+    public sealed partial class AddUsernameToUserRequest : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(teste));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUsernameToUserRequest));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702151817140_teste"; }
+            get { return "201702151840191_AddUsernameToUserRequest"; }
         }
         
         string IMigrationMetadata.Source

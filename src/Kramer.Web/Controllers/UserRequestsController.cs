@@ -118,9 +118,12 @@ namespace Kramer.Controllers
 
         [Authorize(Roles="Admin")]
         [HttpPost]
-        public ActionResult ChangeStatus(UserRequestChangeStatusViewModel userRequest)
+        public ActionResult ChangeStatus(UserRequestChangeStatusViewModel userRequestViewModel)
         {
-            userRequestRepository.ChangeStatus(userRequest.Id, userRequest.Status.Id);
+            var userRequest = userRequestRepository.GetById(userRequestViewModel.Id);
+            Mapper.Map<UserRequestChangeStatusViewModel, UserRequest>(userRequestViewModel, userRequest);
+            userRequestRepository.Update(userRequest);
+
             emailSender.To = userRequest.Email;
             emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
             emailSender.Subject = "Global Payments - Credenciais de Acesso";
@@ -130,7 +133,7 @@ namespace Kramer.Controllers
                 + "Você está recebendo este email por solicitação da Global Payments. </br>"
                 + "Abaixo estão suas credenciais para acessar o Portal de Serviços da Global Payments.Elas devem ser usadas exclusivamente por você, e não devem ser compartilhadas com outras pessoas.</br>"
                 + "https://portaldeservicos.globalpagamentos.com.br/Pages/Login-global.aspx?x=7A41CA43-8BED-4975-9EB8-FFED74B5228F</br>"
-                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequest.Password
+                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequestViewModel.Password
                 + "</br> Troque sua senha ao acessar o portal.</br>"
                 + "Qualquer dúvida operacional, entre em contato com a Global Payments.";
             emailSender.Send();

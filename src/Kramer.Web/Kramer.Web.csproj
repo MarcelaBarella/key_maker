@@ -247,17 +247,9 @@
     <Compile Include="Migrations\201702141807277_ChangePendingToStatus.Designer.cs">
       <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702151500115_ChangeUsernameToName.cs" />
-    <Compile Include="Migrations\201702151500115_ChangeUsernameToName.Designer.cs">
-      <DependentUpon>201702151500115_ChangeUsernameToName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702151817140_teste.cs" />
-    <Compile Include="Migrations\201702151817140_teste.Designer.cs">
-      <DependentUpon>201702151817140_teste.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702151820559_teste2.cs" />
-    <Compile Include="Migrations\201702151820559_teste2.Designer.cs">
-      <DependentUpon>201702151820559_teste2.cs</DependentUpon>
+    <Compile Include="Migrations\201702151840191_AddUsernameToUserRequest.cs" />
+    <Compile Include="Migrations\201702151840191_AddUsernameToUserRequest.Designer.cs">
+      <DependentUpon>201702151840191_AddUsernameToUserRequest.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -398,14 +390,8 @@
     <EmbeddedResource Include="Migrations\201702141807277_ChangePendingToStatus.resx">
       <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702151500115_ChangeUsernameToName.resx">
-      <DependentUpon>201702151500115_ChangeUsernameToName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702151817140_teste.resx">
-      <DependentUpon>201702151817140_teste.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702151820559_teste2.resx">
-      <DependentUpon>201702151820559_teste2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702151840191_AddUsernameToUserRequest.resx">
+      <DependentUpon>201702151840191_AddUsernameToUserRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
