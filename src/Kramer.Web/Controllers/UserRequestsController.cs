@@ -167,8 +167,9 @@ namespace Kramer.Controllers
             var dbModel = userRequestRepository.GetById(userRequest.Id);
             
             Mapper.Map(userRequest, dbModel);
-
-            dbModel.SaleTypeId = userRequest.SaleType.Id;
+            var userSaleType = userRequest.SaleType.Id;
+            if(userSaleType != null)
+                dbModel.SaleTypeId = userSaleType;
             userRequestRepository.Update(dbModel);
             return RedirectToAction("Index");
         }
