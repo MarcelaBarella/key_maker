@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201702141807277_ChangePendingToStatus.Designer.cs">
       <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702151500115_ChangeUsernameToName.cs" />
+    <Compile Include="Migrations\201702151500115_ChangeUsernameToName.Designer.cs">
+      <DependentUpon>201702151500115_ChangeUsernameToName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -392,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702141807277_ChangePendingToStatus.resx">
       <DependentUpon>201702141807277_ChangePendingToStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702151500115_ChangeUsernameToName.resx">
+      <DependentUpon>201702151500115_ChangeUsernameToName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

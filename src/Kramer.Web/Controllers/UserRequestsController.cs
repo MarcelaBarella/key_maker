@@ -96,7 +96,7 @@ namespace Kramer.Controllers
 
                 var dbModelUser = Mapper.Map<UserRequest>(userRequest);
 
-                dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
+                //dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.StatusId = PENDING;
 

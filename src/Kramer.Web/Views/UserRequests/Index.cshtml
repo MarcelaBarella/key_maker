@@ -24,6 +24,9 @@
             Status
         </th>
         <th>
+            User Name
+        </th>
+        <th>
             Requester
         </th>
         <th>
@@ -41,10 +44,13 @@
             @Html.DisplayFor(_ => item.SaleType.Name)
         </td>
         <td>
-            @Html.DisplayFor(_ => item.Username)
+            @Html.DisplayFor(_ => item.Name)
         </td>
         <td>
             @Html.DisplayFor(_ => item.Status.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(_ => item.Username)
         </td>
         <td>
             @Html.DisplayFor(_ => item.RequestedBy.Email)

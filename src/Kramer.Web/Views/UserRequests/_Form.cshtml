@@ -13,7 +13,7 @@
     <div class="form-group">
         <label for="Username" class="control-label col-md-2">Name</label>
         <div class="col-md-10">
-            <input type="text" name="Username" class="form-control" value="@Model.Username">
+            <input type="text" name="Name" class="form-control" value="@Model.Name">
         </div>
     </div>
 
@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label for="SaleType" class="control-label col-md-2">Sale Type</label>
-        <select id="saletypedrop" name="SaleType.Id" class="dropdown col-md-offset-2" disabled="true"/>
+        <select id="saletypedrop" name="SaleType.Id" class="dropdown col-md-offset-2"/>
             @foreach (var saletype in Model.AvailableSaleTypes)
             {
                 if (Model.SaleType == null)
