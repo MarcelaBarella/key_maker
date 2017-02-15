@@ -22,6 +22,8 @@ namespace Kramer.App_Start
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
+        public static IKernel Kernel { get; private set; }
+
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -83,6 +85,8 @@ namespace Kramer.App_Start
                 .WithConstructorArgument("password", ConfigurationManager.AppSettings["SmtpPassword"])
                 .WithConstructorArgument("enableSsl", bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"]))
                 .WithConstructorArgument("throwError", bool.Parse(ConfigurationManager.AppSettings["SmtpThrowError"]));
+
+            Kernel = kernel;
 
         }        
     }

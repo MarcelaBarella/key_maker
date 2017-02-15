@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Kramer.Models;
+using Kramer.Helpers;
+using Ninject;
+using Kramer.App_Start;
 
 namespace Kramer
 {
@@ -18,7 +21,16 @@ namespace Kramer
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            var ninject = NinjectWebCommon.Kernel;
+            var emailSender = ninject.Get<IEmailSender>();
+
+            emailSender.From = "marcela.barella@hotmail.com";
+            emailSender.To = message.Destination;
+            emailSender.Subject = message.Subject;
+            emailSender.Body = message.Body;
+
+            emailSender.Send();
+
             return Task.FromResult(0);
         }
     }
@@ -42,6 +54,7 @@ namespace Kramer
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
+            
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
@@ -60,6 +73,7 @@ namespace Kramer
                 RequireUppercase = false,
             };
 
+            manager.EmailService = new EmailService();
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -76,7 +90,7 @@ namespace Kramer
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
+
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
