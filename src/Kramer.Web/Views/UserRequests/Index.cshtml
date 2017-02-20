@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table pagination">
     <tr>
         <th>
             E-mail
@@ -66,22 +66,3 @@
 }
 
 </table>
-@section Scripts {
-    <script>
-
-	    function StatusColor() {
-		    var status = $(".status").val();
-		    if (status == "PENDENTE")
-		    {
-			    status.fontcolor("#e6b800");
-		    }
-		    else if(status == "CONCLUIDO")
-		    {
-			    status.fontcolor("#009933");
-		    }
-		    else{
-			    status.fontcolor("#cc0000")
-		    }
-	    }
-    </script>
-}

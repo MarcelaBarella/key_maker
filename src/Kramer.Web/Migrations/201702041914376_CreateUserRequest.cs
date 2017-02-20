@@ -11,7 +11,7 @@ namespace Kramer.Migrations
                 "dbo.UserRequests",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: true, identity: true),
                         Email = c.String(),
                         Role = c.String(),
                         Username = c.String(),

@@ -142,7 +142,7 @@ namespace Kramer.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        //O edit está com problemas de conversão de datetime2 pra datetime
         public ActionResult Edit(int id)
         {
             if (id == null)
