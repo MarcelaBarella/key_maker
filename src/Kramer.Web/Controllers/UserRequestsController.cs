@@ -10,6 +10,7 @@ using Kramer.Repository;
 using Kramer.Repository.Interfaces;
 using Kramer.Services;
 using Microsoft.AspNet.Identity;
+using Kramer.Services.Interfaces;
 
 namespace Kramer.Controllers
 {
@@ -20,8 +21,8 @@ namespace Kramer.Controllers
         private IUserRequestRepository userRequestRepository;
         private IUserRepository userRepository;
         private ISaleTypeService saleTypeService;
-        private IEmailSender emailSender;
         private IStatusRepository statusRepository;
+        private INotificationService notificationService;
 
         public UserRequestsController(
             IUserRequestRepository userRequestRepository, 
@@ -29,14 +30,14 @@ namespace Kramer.Controllers
             IUserRepository userRepository,
             IStatusRepository statusRepository,
             ISaleTypeService saleTypeService,
-            IEmailSender emailSender)
+            INotificationService notificationService)
         {
             this.userRequestRepository = userRequestRepository;
             this.saleTypeRepository = saleTypeRepository;
             this.userRepository = userRepository;
             this.saleTypeService = saleTypeService;
-            this.emailSender = emailSender;
             this.statusRepository = statusRepository;
+            this.notificationService = notificationService;
         }
 
 
@@ -120,35 +121,23 @@ namespace Kramer.Controllers
         [HttpPost]
         public ActionResult ChangeStatus(UserRequestChangeStatusViewModel userRequestViewModel)
         {
+            const int CANCELED = 3;
+            const int COMPLETED = 2;
+
             var userRequest = userRequestRepository.GetById(userRequestViewModel.Id);
             Mapper.Map<UserRequestChangeStatusViewModel, UserRequest>(userRequestViewModel, userRequest);
             userRequestRepository.Update(userRequest);
 
-            emailSender.To = userRequest.RequestedBy.ToString();
-            emailSender.From = userRequest.Email; //isso pode mudar, podemos injetar o From via construtor também.
-            emailSender.Subject = "Global Payments - Credenciais de Acesso";
-            emailSender.Body =
-                "Olá" //Nome da pessoa
-                + "</br ></br>"
-                + "Seu usuario foi criado com sucesso";
+            if (userRequestViewModel.Status.Id == COMPLETED)
+            {
+                notificationService.SendConfirmationToRequester(userRequest.RequestedBy.Email, userRequest.RequestedBy.Name, userRequest.Email);
+                notificationService.SendCredentialsToUser(userRequest.Email, userRequest.Name, userRequest.Username, userRequestViewModel.Password);
+            }
+            else if(userRequestViewModel.Status.Id == CANCELED)
+            {
+                notificationService.SendCancellationToRequester(userRequest.RequestedBy.Email, userRequest.RequestedBy.Name, userRequest.Email);
+            }
 
-            emailSender.To = userRequest.Email;
-            emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
-            emailSender.Subject = "Global Payments - Credenciais de Acesso";
-            emailSender.Body =
-                "Olá" //Nome da pessoa
-                + "</br ></br>"
-                + "Você está recebendo este email por solicitação da Global Payments. </br>"
-                + "Abaixo estão suas credenciais para acessar o Portal de Serviços da Global Payments.Elas devem ser usadas exclusivamente por você, e não devem ser compartilhadas com outras pessoas.</br>"
-                + "https://portaldeservicos.globalpagamentos.com.br/Pages/Login-global.aspx?x=7A41CA43-8BED-4975-9EB8-FFED74B5228F</br>"
-                + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequestViewModel.Password
-                + "</br> Troque sua senha ao acessar o portal.</br>"
-                + "Qualquer dúvida operacional, entre em contato com a Global Payments.";
-            
-            
-            
-            
-            emailSender.Send();
 
             return RedirectToAction("Index");
         }

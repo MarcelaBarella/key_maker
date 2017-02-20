@@ -17,6 +17,7 @@ namespace Kramer.App_Start
     using Kramer.Models;
     using Kramer.Repository.Interfaces;
     using Kramer.Services;
+    using Kramer.Services.Interfaces;
 
     public static class NinjectWebCommon 
     {
@@ -84,7 +85,10 @@ namespace Kramer.App_Start
                 .WithConstructorArgument("username", ConfigurationManager.AppSettings["SmtpUsername"])
                 .WithConstructorArgument("password", ConfigurationManager.AppSettings["SmtpPassword"])
                 .WithConstructorArgument("enableSsl", bool.Parse(ConfigurationManager.AppSettings["SmtpEnableSsl"]))
-                .WithConstructorArgument("throwError", bool.Parse(ConfigurationManager.AppSettings["SmtpThrowError"]));
+                .WithConstructorArgument("throwError", bool.Parse(ConfigurationManager.AppSettings["SmtpThrowError"]))
+                .WithConstructorArgument("from", ConfigurationManager.AppSettings["SmtpFrom"]);
+
+            kernel.Bind<INotificationService>().To<EmailNotificationService>();
 
             Kernel = kernel;
 

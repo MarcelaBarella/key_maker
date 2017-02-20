@@ -276,6 +276,8 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\UserRequestRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Services\EmailNotificationService.cs" />
+    <Compile Include="Services\Interfaces\INotificationService.cs" />
     <Compile Include="Services\Interfaces\ISaleTypeService.cs" />
     <Compile Include="Services\SaleTypeService.cs" />
     <Compile Include="Startup.cs" />

@@ -9,7 +9,7 @@ namespace Kramer.Helpers
         private SmtpClient smtp;
         private bool throwError;
 
-        public EmailSender(string host, int port, string username, string password, bool enableSsl, bool throwError)
+        public EmailSender(string host, int port, string username, string password, bool enableSsl, string from, bool throwError)
         {
             smtp = new SmtpClient();
             smtp.Host = host;
@@ -17,6 +17,7 @@ namespace Kramer.Helpers
             smtp.Credentials = new NetworkCredential(username, password);
             smtp.EnableSsl = enableSsl;
             this.throwError = throwError;
+            this.From = from;
         }
 
         public string To { get; set; }

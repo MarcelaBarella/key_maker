@@ -13,15 +13,20 @@ namespace Kramer
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-           /* routes.MapRoute(
+           routes.MapRoute(
                 name: "Requests", //esse é um nome qualquer que você dá para a sua rota,
-                url: "/requests",
-                defaults: new {controller = "UserRequests", action = "Index"}); */
+                url: "requests",
+                defaults: new {controller = "UserRequests", action = "Index"});
+
+           routes.MapRoute(
+               name: "Home",
+               url: "Home",
+               defaults: new { controller = "UserRequests", action = "Index" });
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "UserRequests", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
