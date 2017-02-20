@@ -199,6 +199,10 @@
     <Compile Include="Migrations\201702022038594_InitialCreate.Designer.cs">
       <DependentUpon>201702022038594_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702041914376_CreateUserRequest.cs" />
+    <Compile Include="Migrations\201702041914376_CreateUserRequest.Designer.cs">
+      <DependentUpon>201702041914376_CreateUserRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201702042111173_CreateAdminRole.cs" />
     <Compile Include="Migrations\201702042111173_CreateAdminRole.Designer.cs">
       <DependentUpon>201702042111173_CreateAdminRole.cs</DependentUpon>
@@ -354,6 +358,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702022038594_InitialCreate.resx">
       <DependentUpon>201702022038594_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702041914376_CreateUserRequest.resx">
+      <DependentUpon>201702041914376_CreateUserRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702042111173_CreateAdminRole.resx">
       <DependentUpon>201702042111173_CreateAdminRole.cs</DependentUpon>

@@ -96,7 +96,7 @@ namespace Kramer.Controllers
 
                 var dbModelUser = Mapper.Map<UserRequest>(userRequest);
 
-                //dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
+                dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.StatusId = PENDING;
 
@@ -124,6 +124,14 @@ namespace Kramer.Controllers
             Mapper.Map<UserRequestChangeStatusViewModel, UserRequest>(userRequestViewModel, userRequest);
             userRequestRepository.Update(userRequest);
 
+            emailSender.To = userRequest.RequestedBy.ToString();
+            emailSender.From = userRequest.Email; //isso pode mudar, podemos injetar o From via construtor também.
+            emailSender.Subject = "Global Payments - Credenciais de Acesso";
+            emailSender.Body =
+                "Olá" //Nome da pessoa
+                + "</br ></br>"
+                + "Seu usuario foi criado com sucesso";
+
             emailSender.To = userRequest.Email;
             emailSender.From = "marcela.barella@hotmail.com"; //isso pode mudar, podemos injetar o From via construtor também.
             emailSender.Subject = "Global Payments - Credenciais de Acesso";
@@ -136,6 +144,10 @@ namespace Kramer.Controllers
                 + "</br> Login: " + userRequest.Username + "</br> Senha: " + userRequestViewModel.Password
                 + "</br> Troque sua senha ao acessar o portal.</br>"
                 + "Qualquer dúvida operacional, entre em contato com a Global Payments.";
+            
+            
+            
+            
             emailSender.Send();
 
             return RedirectToAction("Index");
