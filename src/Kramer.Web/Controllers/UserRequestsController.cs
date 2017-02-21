@@ -196,6 +196,13 @@ namespace Kramer.Controllers
             return user.Roles.Any(role => role.RoleId == ADMIN);
         }
 
+        private bool UserCanRequestGP(ApplicationUser user)
+        {
+            const string GP = "6";
+
+            return user.Roles.Any(role => role.RoleId == GP);
+        }
+
         private List<SaleTypeViewModel> GetSaleTypes()
         {
             var saleTypes = saleTypeService.GetAvailableSaleTypes(GetCurrentUser().Id);

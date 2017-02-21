@@ -19,9 +19,10 @@
 
     <div class="form-group">
         <label for="Usertype" class="control-label col-md-2">User Type</label>
+@if (ViewBag.UserIsAdmin) { 
         <div class="radio-inline">
             <label><input type="radio" name="optradio" id="UsertypeGM" value="UsertypeGM" />Global Master</label>
-        </div>
+        </div> }
         <div class="radio-inline">
             <label><input type="radio" name="optradio" id="UsertypeST" value="UsertypeST" />Sale Type</label>
         </div>
