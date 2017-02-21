@@ -45,6 +45,8 @@ namespace Kramer.Controllers
         public ActionResult Index()
         {
             var currentUser = GetCurrentUser();
+            ViewBag.UserIsAdmin = UserIsAdmin(currentUser);
+
             var requests = userRequestRepository.All(); //select * from UserRequest
 
             if (!UserIsAdmin(currentUser))
