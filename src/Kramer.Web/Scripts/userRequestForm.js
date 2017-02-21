@@ -5,8 +5,10 @@
             if (radioValue == "UsertypeGM") {
                 $("#saletypedrop").prop("disabled", true);
                 $("#saletypedrop").val("null");
+                $("#saletypedrop").prop("required", false);
             } else {
                 $("#saletypedrop").prop("disabled", false);
+                $("saletypedrop").prop("required", true);
             }
         }
     });

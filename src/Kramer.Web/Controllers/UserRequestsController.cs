@@ -62,6 +62,9 @@ namespace Kramer.Controllers
         // GET: UserRequests/Create
         public ActionResult Create()
         {
+            ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
+            ViewBag.UserCanRequestGp = UserCanRequestGP(GetCurrentUser());
+
             var viewModel = new UserRequestFormViewModel();
             viewModel.AvailableSaleTypes = GetSaleTypes();
             return View(viewModel);
@@ -128,6 +131,9 @@ namespace Kramer.Controllers
         //Possibilidade de editar uma solicitação de outro usuário através da url
         public ActionResult Edit(int id)
         {
+            ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
+            ViewBag.UserCanRequestGp = UserCanRequestGP(GetCurrentUser());
+
             if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

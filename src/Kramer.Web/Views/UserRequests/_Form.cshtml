@@ -19,18 +19,19 @@
 
     <div class="form-group">
         <label for="Usertype" class="control-label col-md-2">User Type</label>
-@if (ViewBag.UserIsAdmin) { 
+    @if (ViewBag.UserIsAdmin || ViewBag.UserCanRequestGp) {
         <div class="radio-inline">
-            <label><input type="radio" name="optradio" id="UsertypeGM" value="UsertypeGM" />Global Master</label>
-        </div> }
+            <label><input type="radio" name="optradio" id="UsertypeGM" value="UsertypeGM"/>Global Master</label>
+        </div>
+    }
         <div class="radio-inline">
-            <label><input type="radio" name="optradio" id="UsertypeST" value="UsertypeST" />Sale Type</label>
+            <label><input type="radio" name="optradio" id="UsertypeST" value="UsertypeST"/>Sale Type</label>
         </div>
     </div>
 
     <div class="form-group">
         <label for="SaleType" class="control-label col-md-2">Sale Type</label>
-        <select id="saletypedrop" name="SaleType.Id" class="dropdown col-md-offset" />
+        <select id="saletypedrop" name="SaleType.Id" class="dropdown col-md-offset"/>
             @foreach (var saletype in Model.AvailableSaleTypes)
             {
                 if (Model.SaleType == null)
