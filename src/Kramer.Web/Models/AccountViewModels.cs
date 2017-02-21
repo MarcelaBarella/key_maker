@@ -55,16 +55,16 @@ namespace Kramer.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Manter Logado")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Display(Name = "User Name")]
+        [Display(Name = "Nome do Usuário")]
         public string Name { get; set; }
         
         [Required]
@@ -75,12 +75,12 @@ namespace Kramer.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Password", ErrorMessage = "A senha e sua confirmção não são iguais!")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -94,12 +94,12 @@ namespace Kramer.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Password", ErrorMessage = "A senha e sua confirmção não são iguais!")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

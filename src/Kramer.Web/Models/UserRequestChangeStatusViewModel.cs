@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace Kramer.Models
 {
     public class UserRequestChangeStatusViewModel
