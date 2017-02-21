@@ -44,13 +44,10 @@ namespace Kramer.Controllers
         // GET: UserRequests
         public ActionResult Index()
         {
-            const string ADMIN = "1";
-
             var currentUser = GetCurrentUser();
-            bool isAdmin = currentUser.Roles.Any(role => role.RoleId == ADMIN);
             var requests = userRequestRepository.All(); //select * from UserRequest
 
-            if (!isAdmin)
+            if (!UserIsAdmin(currentUser))
             {
                 //select * fromUserRequest 
                 //where requestById == currentUser.Id
@@ -146,12 +143,16 @@ namespace Kramer.Controllers
         //Possibilidade de editar uma solicitação de outro usuário através da url
         public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-            UserRequest userRequest = userRequestRepository.GetById(id);
+
+            var currentUser = GetCurrentUser();
+            var currentUserIsAdmin = UserIsAdmin(currentUser);
+
+            //Se o usuário for admin, ele pode ter acesso a qualquer UserRequest criado.
+            UserRequest userRequest = userRequestRepository.All().FirstOrDefault(request => request.Id == id && (currentUserIsAdmin || request.RequestedBy.Id == currentUser.Id));
             if (userRequest == null)
             {
                 return HttpNotFound();
@@ -182,6 +183,13 @@ namespace Kramer.Controllers
         private ApplicationUser GetCurrentUser()
         {
             return userRepository.GetById(User.Identity.GetUserId());
+        }
+
+        private bool UserIsAdmin(ApplicationUser user)
+        {
+            const string ADMIN = "1";
+
+            return user.Roles.Any(role => role.RoleId == ADMIN);
         }
 
         private List<SaleTypeViewModel> GetSaleTypes()
