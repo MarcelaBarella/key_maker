@@ -22,7 +22,7 @@
         </th>
         <th>
             Status
-        </th>
+        </th> 
         <th>
             User Name
         </th>
@@ -60,10 +60,10 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new {id = item.Id}) 
-            @(
-              ViewBag.UserIsAdmin ? "|" + @Html.ActionLink("Change Status", "ChangeStatus", new {id = item.Id})
-                    : ""
-            )
+            @if (ViewBag.UserIsAdmin)
+            {   @Html.Raw(" | ")
+                @Html.ActionLink("Change Status", "ChangeStatus", new {id = item.Id})
+            }
         </td>
     </tr>
 }
