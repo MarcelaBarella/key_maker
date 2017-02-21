@@ -59,21 +59,6 @@ namespace Kramer.Controllers
             return View(requests.ToList());
         }
 
-        // GET: UserRequests/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserRequest userRequest = userRequestRepository.GetById(id.Value);
-            if (userRequest == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userRequest);
-        }
-
         // GET: UserRequests/Create
         public ActionResult Create()
         {
@@ -91,15 +76,13 @@ namespace Kramer.Controllers
         {
             const int PENDING = 1;
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ValidateSaleTypeForCurrentUser(userRequest))
             {
-
                 var dbModelUser = Mapper.Map<UserRequest>(userRequest);
 
                 dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.StatusId = PENDING;
-
 
                 userRequestRepository.Add(dbModelUser);
                 return RedirectToAction("Index");
@@ -150,11 +133,7 @@ namespace Kramer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var currentUser = GetCurrentUser();
-            var currentUserIsAdmin = UserIsAdmin(currentUser);
-
-            //Se o usuário for admin, ele pode ter acesso a qualquer UserRequest criado.
-            UserRequest userRequest = userRequestRepository.All().FirstOrDefault(request => request.Id == id && (currentUserIsAdmin || request.RequestedBy.Id == currentUser.Id));
+            var userRequest = GetUserRequestForCurrentUser(id);
             if (userRequest == null)
             {
                 return HttpNotFound();
@@ -165,6 +144,19 @@ namespace Kramer.Controllers
             return View(model);
         }
 
+        private UserRequest GetUserRequestForCurrentUser(int id)
+        {
+            var currentUser = GetCurrentUser();
+            var currentUserIsAdmin = UserIsAdmin(currentUser);
+
+            //Se o usuário for admin, ele pode ter acesso a qualquer UserRequest criado.
+            UserRequest userRequest =
+                userRequestRepository.All()
+                    .FirstOrDefault(
+                        request => request.Id == id && (currentUserIsAdmin || request.RequestedBy.Id == currentUser.Id));
+            return userRequest;
+        }
+
         // POST: UserRequests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -172,7 +164,12 @@ namespace Kramer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserRequestFormViewModel userRequest)
         {
-            var dbModel = userRequestRepository.GetById(userRequest.Id);
+            if (!ValidateSaleTypeForCurrentUser(userRequest))
+                return View(userRequest);
+
+            var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
+            if(dbModel == null)
+                return View(userRequest);
             
             Mapper.Map(userRequest, dbModel);
             var userSaleType = userRequest.SaleType.Id;
@@ -180,6 +177,11 @@ namespace Kramer.Controllers
                 dbModel.SaleTypeId = userSaleType;
             userRequestRepository.Update(dbModel);
             return RedirectToAction("Index");
+        }
+
+        private bool ValidateSaleTypeForCurrentUser(UserRequestFormViewModel userRequest)
+        {
+            return userRequest.SaleType == null || GetSaleTypes().Any(saleType => saleType.Id == userRequest.SaleType.Id);
         }
 
         private ApplicationUser GetCurrentUser()
