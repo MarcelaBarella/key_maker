@@ -45,7 +45,7 @@ namespace Kramer.Controllers
         public ActionResult Index()
         {
             var currentUser = GetCurrentUser();
-            ViewBag.UserIsAdmin = UserIsAdmin(currentUser);
+            FillViewBagWithUserInformation();
 
             var requests = userRequestRepository.All(); //select * from UserRequest
 
@@ -62,17 +62,14 @@ namespace Kramer.Controllers
         // GET: UserRequests/Create
         public ActionResult Create()
         {
-            ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
-            ViewBag.UserCanRequestGp = UserCanRequestGP(GetCurrentUser());
+            FillViewBagWithUserInformation();
 
             var viewModel = new UserRequestFormViewModel();
             viewModel.AvailableSaleTypes = GetSaleTypes();
             return View(viewModel);
         }
 
-        // POST: UserRequests/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserRequestFormViewModel userRequest)
@@ -83,7 +80,8 @@ namespace Kramer.Controllers
             {
                 var dbModelUser = Mapper.Map<UserRequest>(userRequest);
 
-                dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
+                if(userRequest.SaleType != null) dbModelUser.SaleType = GetSaleTypeById(userRequest.SaleType.Id);
+
                 dbModelUser.RequestedBy = GetCurrentUser();
                 dbModelUser.StatusId = PENDING;
 
@@ -131,8 +129,7 @@ namespace Kramer.Controllers
         //Possibilidade de editar uma solicitação de outro usuário através da url
         public ActionResult Edit(int id)
         {
-            ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
-            ViewBag.UserCanRequestGp = UserCanRequestGP(GetCurrentUser());
+            FillViewBagWithUserInformation();
 
             if (id == 0)
             {
@@ -150,6 +147,35 @@ namespace Kramer.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserRequestFormViewModel userRequest)
+        {
+            FillViewBagWithUserInformation();
+            userRequest.AvailableSaleTypes = GetSaleTypes();
+
+            if (!ValidateSaleTypeForCurrentUser(userRequest))
+                return View(userRequest);
+
+            var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
+            if(dbModel == null)
+                return View(userRequest);
+            
+            if (userRequest.GlobalMaster)
+            {
+                dbModel.SaleTypeId = null;
+            }
+            if (userRequest.SaleType != null)
+            {
+                dbModel.SaleTypeId = userRequest.SaleType.Id;
+            }
+            
+            Mapper.Map(userRequest, dbModel);
+                
+            userRequestRepository.Update(dbModel);
+            return RedirectToAction("Index");
+        }
+
         private UserRequest GetUserRequestForCurrentUser(int id)
         {
             var currentUser = GetCurrentUser();
@@ -161,28 +187,6 @@ namespace Kramer.Controllers
                     .FirstOrDefault(
                         request => request.Id == id && (currentUserIsAdmin || request.RequestedBy.Id == currentUser.Id));
             return userRequest;
-        }
-
-        // POST: UserRequests/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserRequestFormViewModel userRequest)
-        {
-            if (!ValidateSaleTypeForCurrentUser(userRequest))
-                return View(userRequest);
-
-            var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
-            if(dbModel == null)
-                return View(userRequest);
-            
-            Mapper.Map(userRequest, dbModel);
-            var userSaleType = userRequest.SaleType.Id;
-            if(userSaleType != null)
-                dbModel.SaleTypeId = userSaleType;
-            userRequestRepository.Update(dbModel);
-            return RedirectToAction("Index");
         }
 
         private bool ValidateSaleTypeForCurrentUser(UserRequestFormViewModel userRequest)
@@ -202,11 +206,11 @@ namespace Kramer.Controllers
             return user.Roles.Any(role => role.RoleId == ADMIN);
         }
 
-        private bool UserCanRequestGP(ApplicationUser user)
+        private bool UserCanRequestGlobalMaster(ApplicationUser user)
         {
-            const string GP = "6";
+            const string GM = "6";
 
-            return user.Roles.Any(role => role.RoleId == GP);
+            return user.Roles.Any(role => role.RoleId == GM);
         }
 
         private List<SaleTypeViewModel> GetSaleTypes()
@@ -218,6 +222,12 @@ namespace Kramer.Controllers
         private SaleType GetSaleTypeById(int id)
         {
             return saleTypeRepository.GetById(id);
+        }
+
+        private void FillViewBagWithUserInformation()
+        {
+            ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
+            ViewBag.UserCanRequestGp = UserCanRequestGlobalMaster(GetCurrentUser());
         }
     }
 }

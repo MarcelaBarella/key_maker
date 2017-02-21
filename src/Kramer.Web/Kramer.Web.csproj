@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201702151840191_AddUsernameToUserRequest.Designer.cs">
       <DependentUpon>201702151840191_AddUsernameToUserRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702212109266_AddGlobalMasterToUserRequest.cs" />
+    <Compile Include="Migrations\201702212109266_AddGlobalMasterToUserRequest.Designer.cs">
+      <DependentUpon>201702212109266_AddGlobalMasterToUserRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -285,6 +289,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -294,6 +299,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -402,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702151840191_AddUsernameToUserRequest.resx">
       <DependentUpon>201702151840191_AddUsernameToUserRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702212109266_AddGlobalMasterToUserRequest.resx">
+      <DependentUpon>201702212109266_AddGlobalMasterToUserRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

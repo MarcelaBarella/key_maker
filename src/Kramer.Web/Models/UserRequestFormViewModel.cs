@@ -1,9 +1,5 @@
-﻿using Kramer.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Kramer.Models
 {
@@ -19,5 +15,6 @@ namespace Kramer.Models
         public SaleTypeViewModel SaleType { get; set; }
         public List<SaleTypeViewModel> SaleTypes { get; set; }
         public DateTime? RequestDate { get; set; }
+        public bool GlobalMaster { get; set; }
     }
 }

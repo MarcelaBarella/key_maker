@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    $('input[name="optradio"]').click(function () {
-        if ($('input[name="optradio"]').is(':checked')) {
-            var radioValue = $("input[name='optradio']:checked").val();
-            if (radioValue == "UsertypeGM") {
+    $('input[name="GlobalMaster"]').click(function () {
+        if ($('input[name="GlobalMaster"]').is(':checked')) {
+            var radioValue = $("input[name='GlobalMaster']:checked").val();
+            if (radioValue == "true") {
                 $("#saletypedrop").prop("disabled", true);
                 $("#saletypedrop").val("null");
                 $("#saletypedrop").prop("required", false);

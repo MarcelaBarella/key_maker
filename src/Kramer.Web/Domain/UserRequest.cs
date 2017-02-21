@@ -15,5 +15,6 @@ namespace Kramer.Domain
         public virtual SaleType SaleType { get; set; }
         public virtual int? SaleTypeId { get; set; }
         public virtual DateTime RequestDate { get; set; }
+        public virtual bool GlobalMaster { get; set; }
     }
 }

@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<Kramer.Domain.UserRequest>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listagem de Solicitações";
 }
 
-<h2>Index</h2>
+<h2>Solicitações de Usuários</h2>
 
 <p>
     @Html.ActionLink("Criar Nova Solicitação", "Create")
 </p>
-<table class="table pagination">
+<table class="table pagination js-datatable">
+    <thead>
     <tr>
         <th>
             E-mail
@@ -18,11 +19,14 @@
             Canal de Vendas
         </th>
         <th>
+            Global Master
+        </th>
+        <th>
             Nome
         </th>
         <th>
             Status
-        </th> 
+        </th>
         <th>
             Nome do Usuário
         </th>
@@ -34,38 +38,55 @@
         </th>
         <th></th>
     </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(_ => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.SaleType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.Status.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.RequestedBy.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(_ => item.RequestDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) 
-            @if (ViewBag.UserIsAdmin)
-            {   @Html.Raw(" | ")
-                @Html.ActionLink("Change Status", "ChangeStatus", new {id = item.Id})
-            }
-        </td>
-    </tr>
-}
+    <tbody>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.SaleType.Name)
+                </td>
+                <td>
+                    @(item.GlobalMaster ? "SIM" : "NÃO")
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Status.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.RequestedBy.Email)
+                </td>
+                <td>
+                    @item.RequestDate.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                    @if (ViewBag.UserIsAdmin)
+                    {
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Atualizar Status", "ChangeStatus", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section scripts
+{
+    <script>
+        $(function() {
+            $(".js-datatable").DataTable();
+        });
+    </script>
+}

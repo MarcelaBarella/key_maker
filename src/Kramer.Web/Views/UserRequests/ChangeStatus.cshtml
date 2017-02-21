@@ -1,9 +1,9 @@
 ﻿@model Kramer.Models.UserRequestChangeStatusViewModel
 @{
-    ViewBag.Title = "Change Status";
+    ViewBag.Title = "Atualizar Status";
 }
 
-<h2>Change status  @Model.Email</h2>
+<h2>Atualizar Status de: @Model.Email</h2>
 
 @using(@Html.BeginForm())
 {
@@ -14,35 +14,37 @@
         <div class="form-group">
             <label for="Username" class="control-label col-md-2">Nome do Usuário: </label>
             <div class="col-md-10">
-                <input type="text" name="Username" class="form-control" value="@Model.Username" required>
+                <input type="text" name="Username" class="form-control" value="@Model.Username">
             </div>
         </div>
 
 	   	<div class="form-group">
 	   		<label for="Password" class="control-label col-md-2">Senha: </label>
 	   		<div class="col-md-10">
-	   			<input type="text" name="Password" required>
+	   			<input type="text" class="form-control" name="Password">
 			</div>
 	   	</div>
 
         <div class="form-group">
             <label for="Status" class="control-label col-md-2">Status: </label>
-            <select name="Status.Id" class="dropdown col-md-offset-2">
-                @foreach (var status in Model.Statuses)
-                {
-                    if (Model.Status == null)
+            <div class="col-md-10">
+                <select name="Status.Id" class="form-control dropdown">
+                    @foreach (var status in Model.Statuses)
                     {
-                        <option value="@status.Id">@status.Name</option>
+                        if (Model.Status == null)
+                        {
+                            <option value="@status.Id">@status.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@status.Id"
+                                    @(status.Id == Model.Status.Id ? "selected" : "")>
+                                @status.Name
+                            </option>
+                        }
                     }
-                    else
-                    {
-                        <option value="@status.Id"
-                                @(status.Id == Model.Status.Id ? "selected" : "")>
-                            @status.Name
-                        </option>
-                    }
-                }
-            </select>
+                </select>
+            </div>
         </div>
 
 	   	<div class="form-group">
