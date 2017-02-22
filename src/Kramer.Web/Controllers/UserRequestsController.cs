@@ -75,6 +75,7 @@ namespace Kramer.Controllers
         public ActionResult Create(UserRequestFormViewModel userRequest)
         {
             const int PENDING = 1;
+            FillViewBagWithUserInformation();
 
             if (ModelState.IsValid && ValidateSaleTypeForCurrentUser(userRequest))
             {
@@ -89,6 +90,7 @@ namespace Kramer.Controllers
                 return RedirectToAction("Index");
             }
 
+            userRequest.AvailableSaleTypes = GetSaleTypes();
             return View(userRequest);
         }
 
