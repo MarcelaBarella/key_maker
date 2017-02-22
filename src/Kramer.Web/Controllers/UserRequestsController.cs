@@ -154,7 +154,7 @@ namespace Kramer.Controllers
             FillViewBagWithUserInformation();
             userRequest.AvailableSaleTypes = GetSaleTypes();
 
-            if (!ValidateSaleTypeForCurrentUser(userRequest))
+            if (!ValidateSaleTypeForCurrentUser(userRequest)) //verifico se o usuário tem acesso ao SaleType que ele enviou
                 return View(userRequest);
 
             var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
