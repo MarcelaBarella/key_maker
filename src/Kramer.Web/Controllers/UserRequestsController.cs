@@ -208,7 +208,7 @@ namespace Kramer.Controllers
 
         private bool UserCanRequestGlobalMaster(ApplicationUser user)
         {
-            const string GM = "6";
+            const string GM = "-1";
 
             return user.Roles.Any(role => role.RoleId == GM);
         }
@@ -227,7 +227,7 @@ namespace Kramer.Controllers
         private void FillViewBagWithUserInformation()
         {
             ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
-            ViewBag.UserCanRequestGp = UserCanRequestGlobalMaster(GetCurrentUser());
+            ViewBag.UserCanRequestGm = UserCanRequestGlobalMaster(GetCurrentUser());
         }
     }
 }

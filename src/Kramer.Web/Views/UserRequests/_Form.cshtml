@@ -21,11 +21,11 @@
         <label for="Usertype" class="control-label col-md-2">User Type</label>
     @if (ViewBag.UserIsAdmin || ViewBag.UserCanRequestGm) {
         <div class="radio-inline">
-            <label><input type="radio" class="form-control" name="GlobalMaster" id="UsertypeGM" value="true" @(Model.GlobalMaster ? "checked" : "")/>Global Master</label>
+            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeGM" value="true" @(Model.GlobalMaster ? "checked" : "")/>Global Master</label>
         </div>
     }
         <div class="radio-inline">
-            <label><input type="radio" class="form-control" name="GlobalMaster" id="UsertypeST" value="false" @(Model.SaleType != null ? "checked" : "")/>Sale Type</label>
+            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeST" value="false" @(!Model.GlobalMaster ? "checked" : "")/>Sale Type</label>
         </div>
     </div>
 

@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201702212109266_AddGlobalMasterToUserRequest.Designer.cs">
       <DependentUpon>201702212109266_AddGlobalMasterToUserRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702220328004_AddGlobalMasterToRoles.cs" />
+    <Compile Include="Migrations\201702220328004_AddGlobalMasterToRoles.Designer.cs">
+      <DependentUpon>201702220328004_AddGlobalMasterToRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -411,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702212109266_AddGlobalMasterToUserRequest.resx">
       <DependentUpon>201702212109266_AddGlobalMasterToUserRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702220328004_AddGlobalMasterToRoles.resx">
+      <DependentUpon>201702220328004_AddGlobalMasterToRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
