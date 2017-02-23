@@ -11,26 +11,26 @@
     </div>
 
     <div class="form-group">
-        <label for="Username" class="control-label col-md-2">Name</label>
+        <label for="Username" class="control-label col-md-2">Nome</label>
         <div class="col-md-10">
             <input type="text" name="Name" class="form-control" value="@Model.Name" required>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="Usertype" class="control-label col-md-2">User Type</label>
+        <label for="Usertype" class="control-label col-md-2">Tipo de Usuário</label>
     @if (ViewBag.UserIsAdmin || ViewBag.UserCanRequestGm) {
         <div class="radio-inline">
             <label><input type="radio" class="" name="GlobalMaster" id="UsertypeGM" value="true" @(Model.GlobalMaster ? "checked" : "")/>Global Master</label>
         </div>
     }
         <div class="radio-inline">
-            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeST" value="false" @(!Model.GlobalMaster ? "checked" : "")/>Sale Type</label>
+            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeST" value="false" @(!Model.GlobalMaster ? "checked" : "")/>Canal de Vendas</label>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="SaleType" class="control-label col-md-2">Sale Type</label>
+        <label for="SaleType" class="control-label col-md-2">Canal de Vendas</label>
         <div class="col-md-10">
             <select id="saletypedrop" name="SaleType.Id" class="form-control dropdown col-md-offset" @(Model.GlobalMaster ? "disabled" : "") />
             @foreach (var saletype in Model.AvailableSaleTypes)

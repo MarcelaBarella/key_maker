@@ -1,4 +1,6 @@
 ﻿using Kramer.Helpers;
+using Kramer.Models;
+using Kramer.Repository;
 using Kramer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,12 @@ namespace Kramer.Services
     public class EmailNotificationService : INotificationService
     {
         private IEmailSender emailSender;
+        private IUserRepository userRepository;
 
-        public EmailNotificationService(IEmailSender emailSender)
+        public EmailNotificationService(IEmailSender emailSender, IUserRepository userRepository)
         {
             this.emailSender = emailSender;
+            this.userRepository = userRepository;
         }
 
         public void SendConfirmationToRequester(string requesterEmail, string requesterName, string userEmail)
@@ -55,5 +59,18 @@ namespace Kramer.Services
                 + "Para mais informações, por favor, entre em contato com o administrador do sistema.";
             emailSender.Send();
         }
+        //Current User
+        public void SendEditedToUser(string requesterEmail, string currentUserEmail)
+        {
+            emailSender.To = currentUserEmail;
+            emailSender.Subject = "Global Payments - Credenciais de Acesso";
+            emailSender.Body =
+                "Olá " + "fulano"
+                + "</br ></br>"
+                + "A solicitação criada pelo usuário " + requesterEmail + " foi editada, favor verifica-la";
+            emailSender.Send();
+        }
+
+     
     }
 }

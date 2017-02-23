@@ -9,6 +9,12 @@
 <p>
     @Html.ActionLink("Criar Nova Solicitação", "Create")
 </p>
+<p>
+    @if (ViewBag.UserIsAdmin)
+    {
+        @Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    }
+</p>
 <table class="table pagination js-datatable">
     <thead>
     <tr>
@@ -42,7 +48,7 @@
 
     <tbody>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderByDescending(_ => _.RequestDate))
         {
             <tr>
                 <td>
@@ -85,8 +91,12 @@
 @section scripts
 {
     <script>
-        $(function() {
-            $(".js-datatable").DataTable();
+        $(function () {
+            var REQUEST_DATE = 7;
+
+            $(".js-datatable").DataTable({
+                "order": [[REQUEST_DATE, "desc"]]
+            });
         });
     </script>
 }
