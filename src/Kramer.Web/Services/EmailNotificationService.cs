@@ -59,18 +59,34 @@ namespace Kramer.Services
                 + "Para mais informações, por favor, entre em contato com o administrador do sistema.";
             emailSender.Send();
         }
+
         //Current User
         public void SendEditedToUser(string requesterEmail, string currentUserEmail)
         {
             emailSender.To = currentUserEmail;
             emailSender.Subject = "Global Payments - Credenciais de Acesso";
             emailSender.Body =
-                "Olá " + "fulano"
+                "Olá "
                 + "</br ></br>"
                 + "A solicitação criada pelo usuário " + requesterEmail + " foi editada, favor verifica-la";
             emailSender.Send();
         }
 
+        public void SendEditedToAdmins(string userEdited, string currentUser)
+        {
+            var admins = userRepository.GetAdmins().Where(admin => admin.UserName != currentUser);
+
+            emailSender.Subject = "Global Payments - Solicitação Alterada";
+            emailSender.Body = "Olá "
+                               + "</br></br>"
+                               + "A solicitação criada para criação do usuário " + userEdited + " foi alterada.";
+
+            foreach (var admin in admins)
+            {
+                emailSender.To = admin.Email;
+                emailSender.Send();
+            }
+        }
      
     }
 }

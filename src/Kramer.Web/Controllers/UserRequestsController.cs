@@ -174,6 +174,7 @@ namespace Kramer.Controllers
             Mapper.Map(userRequest, dbModel);
                 
             userRequestRepository.Update(dbModel);
+            notificationService.SendEditedToAdmins(dbModel.Email);
             return RedirectToAction("Index");
         }
 

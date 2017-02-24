@@ -1,10 +1,5 @@
-﻿using Kramer.Domain;
+﻿using System.Collections.Generic;
 using Kramer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kramer.Repository
 {
@@ -12,5 +7,6 @@ namespace Kramer.Repository
     {
         ApplicationUser GetById(string userId);
         bool IsAdmin(string userId);
+        List<ApplicationUser> GetAdmins();
     }
 }
