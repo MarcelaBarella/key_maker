@@ -4,12 +4,13 @@ using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
 using Kramer.Domain;
+using Kramer.Helpers;
 using Kramer.Models;
 using Kramer.Repository;
 using Kramer.Repository.Interfaces;
 using Kramer.Services;
-using Kramer.Services.Interfaces;
 using Microsoft.AspNet.Identity;
+using Kramer.Services.Interfaces;
 
 namespace Kramer.Controllers
 {
@@ -90,7 +91,7 @@ namespace Kramer.Controllers
             }
 
             userRequest.AvailableSaleTypes = GetSaleTypes();
-            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            return View(userRequest);
         }
 
         [Authorize(Roles = "Admin")]
@@ -156,7 +157,7 @@ namespace Kramer.Controllers
             userRequest.AvailableSaleTypes = GetSaleTypes();
 
             if (!ValidateSaleTypeForCurrentUser(userRequest)) //verifico se o usuário tem acesso ao SaleType que ele enviou
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                return View(userRequest);
 
             var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
             if(dbModel == null)
@@ -174,7 +175,6 @@ namespace Kramer.Controllers
             Mapper.Map(userRequest, dbModel);
                 
             userRequestRepository.Update(dbModel);
-            notificationService.SendEditedToAdmins(dbModel.Email, GetCurrentUser().UserName);
             return RedirectToAction("Index");
         }
 

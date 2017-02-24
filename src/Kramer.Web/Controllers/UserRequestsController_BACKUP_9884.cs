@@ -90,7 +90,11 @@ namespace Kramer.Controllers
             }
 
             userRequest.AvailableSaleTypes = GetSaleTypes();
+<<<<<<< HEAD
             return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+=======
+            return View("Error");
+>>>>>>> 3372a1b4cfc8f1f4b33a2dd40948fd0b794cf1ea
         }
 
         [Authorize(Roles = "Admin")]
@@ -156,7 +160,11 @@ namespace Kramer.Controllers
             userRequest.AvailableSaleTypes = GetSaleTypes();
 
             if (!ValidateSaleTypeForCurrentUser(userRequest)) //verifico se o usuário tem acesso ao SaleType que ele enviou
+<<<<<<< HEAD
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+=======
+                return View("Error");
+>>>>>>> 3372a1b4cfc8f1f4b33a2dd40948fd0b794cf1ea
 
             var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
             if(dbModel == null)
@@ -174,7 +182,7 @@ namespace Kramer.Controllers
             Mapper.Map(userRequest, dbModel);
                 
             userRequestRepository.Update(dbModel);
-            notificationService.SendEditedToAdmins(dbModel.Email, GetCurrentUser().UserName);
+            notificationService.SendEditedToAdmins(dbModel.Email);
             return RedirectToAction("Index");
         }
 
