@@ -91,7 +91,7 @@ namespace Kramer.Controllers
             }
 
             userRequest.AvailableSaleTypes = GetSaleTypes();
-            return View(userRequest);
+            return View("Error");
         }
 
         [Authorize(Roles = "Admin")]
@@ -157,7 +157,7 @@ namespace Kramer.Controllers
             userRequest.AvailableSaleTypes = GetSaleTypes();
 
             if (!ValidateSaleTypeForCurrentUser(userRequest)) //verifico se o usuário tem acesso ao SaleType que ele enviou
-                return View(userRequest);
+                return View("Error");
 
             var dbModel = GetUserRequestForCurrentUser(userRequest.Id);
             if(dbModel == null)
