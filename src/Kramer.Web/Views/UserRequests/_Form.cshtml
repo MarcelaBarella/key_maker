@@ -1,7 +1,7 @@
 @model Kramer.Models.UserRequestFormViewModel
 
 <div class="form-horizontal">
-    <h4>Solicitação de Usuário</h4>
+    <h4>Solicitações</h4>
     <hr />
     <div class="form-group">
         <label for="Email" class="control-label col-md-2">E-mail</label>
@@ -25,12 +25,12 @@
         </div>
     }
         <div class="radio-inline">
-            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeST" value="false" @(!Model.GlobalMaster ? "checked" : "")/>Canal de Vendas</label>
+            <label><input type="radio" class="" name="GlobalMaster" id="UsertypeST" value="false" @(!Model.GlobalMaster ? "checked" : "")/>Canal de vendas</label>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="SaleType" class="control-label col-md-2">Canal de Vendas</label>
+        <label for="SaleType" class="control-label col-md-2">Canal de vendas</label>
         <div class="col-md-10">
             <select id="saletypedrop" name="SaleType.Id" class="form-control dropdown col-md-offset" @(Model.GlobalMaster ? "disabled" : "") />
             @foreach (var saletype in Model.AvailableSaleTypes)
@@ -55,7 +55,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input 
-                   type="submit" value="@(ViewBag.Action == "Create" ? "Solicitar Novo Usuário" : "Salvar Alterações")" class="btn btn-default" />
+                   type="submit" value="@(ViewBag.Action == "Create" ? "Solicitar novo usuário" : "Salvar alterações")" class="btn btn-default" />
         </div>
     </div>
 </div>

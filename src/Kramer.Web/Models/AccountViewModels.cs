@@ -58,7 +58,7 @@ namespace Kramer.Models
         [Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Display(Name = "Manter Logado")]
+        [Display(Name = "Manter-me logado")]
         public bool RememberMe { get; set; }
     }
 

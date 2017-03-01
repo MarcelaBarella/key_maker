@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<Kramer.Domain.UserRequest>
 
 @{
-    ViewBag.Title = "Listagem de Solicitações";
+    ViewBag.Title = "Lista de solicitações";
 }
 
-<h2>Solicitações de Usuários</h2>
+<h2>Solicitações</h2>
 
 <p>
-    @Html.ActionLink("Criar Nova Solicitação", "Create")
+    @Html.ActionLink("Criar nova solicitação", "Create")
 </p>
 <p>
-    @if (ViewBag.UserIsAdmin)
+    @*@if (ViewBag.UserIsAdmin)
     {
         @Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-    }
+    }*@
 </p>
 <table class="table pagination js-datatable">
     <thead>
@@ -22,7 +22,7 @@
             E-mail
         </th>
         <th>
-            Canal de Vendas
+            Canal de vendas
         </th>
         <th>
             Global Master
@@ -34,13 +34,13 @@
             Status
         </th>
         <th>
-            Nome do Usuário
+            Nome do usuário
         </th>
         <th>
             Solicitante
         </th>
         <th>
-            Data da Solicitação
+            Data da solicitação
         </th>
         <th></th>
     </tr>
@@ -80,7 +80,7 @@
                     @if (ViewBag.UserIsAdmin)
                     {
                         @Html.Raw(" | ")
-                        @Html.ActionLink("Atualizar Status", "ChangeStatus", new { id = item.Id })
+                        @Html.ActionLink("Atualizar status", "ChangeStatus", new { id = item.Id })
                     }
                 </td>
             </tr>

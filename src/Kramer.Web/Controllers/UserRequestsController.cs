@@ -201,7 +201,7 @@ namespace Kramer.Controllers
             return userRepository.GetById(User.Identity.GetUserId());
         }
 
-        private bool UserIsAdmin(ApplicationUser user)
+        public static bool UserIsAdmin(ApplicationUser user)
         {
             const string ADMIN = "1";
 

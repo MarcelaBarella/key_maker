@@ -1,6 +1,6 @@
 ﻿@model Kramer.Models.UserRequestChangeStatusViewModel
 @{
-    ViewBag.Title = "Atualizar Status";
+    ViewBag.Title = "Atualizar status";
 }
 
 <h2>Atualizar Status de: @Model.Email</h2>
@@ -12,7 +12,7 @@
 	   	<input type="hidden" name="Id" value=@Model.Id>
 
         <div class="form-group">
-            <label for="Username" class="control-label col-md-2">Nome do Usuário: </label>
+            <label for="Username" class="control-label col-md-2">Nome do usuário: </label>
             <div class="col-md-10">
                 <input type="text" name="Username" class="form-control" value="@Model.Username" id="userName">
             </div>

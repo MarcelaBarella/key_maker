@@ -18,10 +18,17 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Global Payments", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>
+                        @if (User != null && User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
