@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-group">
-        <label for="Usertype" class="control-label col-md-2">Tipo de Usuário</label>
+        <label for="Usertype" class="control-label col-md-2">Tipo de usuário</label>
     @if (ViewBag.UserIsAdmin || ViewBag.UserCanRequestGm) {
         <div class="radio-inline">
             <label><input type="radio" class="" name="GlobalMaster" id="UsertypeGM" value="true" @(Model.GlobalMaster ? "checked" : "")/>Global Master</label>

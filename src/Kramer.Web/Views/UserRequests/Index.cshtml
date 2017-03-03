@@ -95,8 +95,17 @@
             var REQUEST_DATE = 7;
 
             $(".js-datatable").DataTable({
-                "order": [[REQUEST_DATE, "desc"]]
+                columnDefs: [
+                   { type: 'de_datetime', targets: 0 },
+                   { type: 'de_date', targets: 1 }
+                ],
+                "order": [[REQUEST_DATE, "desc"]],
+                language:
+                    { url: "/Scripts/Portuguese-Brasil.json"}
             });
+
+            
+
         });
     </script>
 }
