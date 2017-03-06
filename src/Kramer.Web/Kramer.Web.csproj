@@ -263,6 +263,10 @@
     <Compile Include="Migrations\201702220328004_AddGlobalMasterToRoles.Designer.cs">
       <DependentUpon>201702220328004_AddGlobalMasterToRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703061821019_AddAdminToAspNetusers.cs" />
+    <Compile Include="Migrations\201703061821019_AddAdminToAspNetusers.Designer.cs">
+      <DependentUpon>201703061821019_AddAdminToAspNetusers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -418,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702220328004_AddGlobalMasterToRoles.resx">
       <DependentUpon>201702220328004_AddGlobalMasterToRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703061821019_AddAdminToAspNetusers.resx">
+      <DependentUpon>201703061821019_AddAdminToAspNetusers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

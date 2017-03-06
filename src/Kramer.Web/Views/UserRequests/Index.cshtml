@@ -96,10 +96,9 @@
 
             $(".js-datatable").DataTable({
                 columnDefs: [
-                   { type: 'de_datetime', targets: 0 },
-                   { type: 'de_date', targets: 1 }
+                    { type: 'date-uk', targets: 0 }
                 ],
-                "order": [[REQUEST_DATE, "desc"]],
+                //"order": [[REQUEST_DATE, "desc"]],
                 language:
                     { url: "/Scripts/Portuguese-Brasil.json"}
             });
