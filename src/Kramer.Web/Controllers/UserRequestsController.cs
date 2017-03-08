@@ -41,12 +41,13 @@ namespace Kramer.Controllers
 
 
         // GET: UserRequests
-        public ActionResult Index()
+        public ActionResult Index(int quantityPerPage, int currentPage)
         {
             var currentUser = GetCurrentUser();
             FillViewBagWithUserInformation();
 
-            var requests = userRequestRepository.All(); //select * from UserRequest
+            var totalToSkip = (currentPage - 1) * quantityPerPage;
+            var requests = userRequestRepository.All().Skip(totalToSkip).Take(quantityPerPage); //select * from UserRequest
 
             if (!UserIsAdmin(currentUser))
             {
@@ -230,6 +231,12 @@ namespace Kramer.Controllers
         {
             ViewBag.UserIsAdmin = UserIsAdmin(GetCurrentUser());
             ViewBag.UserCanRequestGm = UserCanRequestGlobalMaster(GetCurrentUser());
+        }
+
+        public JsonResult GetRequestsJson()
+        {
+            var userRequests = userRequestRepository.All().OrderByDescending(date => date.RequestDate);
+            return Json(userRequests, JsonRequestBehavior.AllowGet);
         }
     }
 }
